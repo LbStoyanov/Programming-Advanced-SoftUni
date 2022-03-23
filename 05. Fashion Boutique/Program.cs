@@ -17,6 +17,10 @@ namespace _05._Fashion_Boutique
             for (int i = clothesInTheBox.Length - 1; i >= 0; i--)
             {
                 var currentCloth = clothesInTheBox[i];
+                if (currentCloth > 20 && currentCloth < 0)
+                {
+                    continue;
+                }
                 stack.Push(currentCloth);
             }
 
@@ -26,7 +30,11 @@ namespace _05._Fashion_Boutique
             //    stack.Push(currentCloth);
             //}
 
-            int racksUsed = 0;
+            int racksUsed = 1;
+            if (stack.Count == 0)
+            {
+                racksUsed = 0;
+            }
             int clothesValueSum = 0;
 
             while (stack.Count > 0)
@@ -36,6 +44,8 @@ namespace _05._Fashion_Boutique
                 {
                     racksUsed++;
                     stack.Pop();
+                    continue;
+                    
                 }
                 if (stack.Count == 1 && clothesValueSum + currentCloth <= rackCapacity)
                 {
@@ -50,7 +60,8 @@ namespace _05._Fashion_Boutique
                 else
                 {
                     racksUsed++;
-                    clothesValueSum = 0;
+                    clothesValueSum = currentCloth;
+                    stack.Pop();
 
                 }
             }
