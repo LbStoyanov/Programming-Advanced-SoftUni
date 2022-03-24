@@ -10,49 +10,47 @@ namespace _07._Truck_Tour
         {
             int n = int.Parse(Console.ReadLine());
 
-            var petrol = new Queue<int>();
-            var distance = new Queue<int>();
-            int[] input;
+            Queue<int[]> queue = new Queue<int[]>();
 
             for (int i = 0; i < n; i++)
             {
-                input = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
-                petrol.Enqueue(input[0]);
-                distance.Enqueue(input[1]);
+                int[] input = Console.ReadLine().Split().Select(int.Parse).ToArray();
+
+                queue.Enqueue(input);
             }
-            int currentFuel;
-            var petrolCopy = new Queue<int>();
-            var distanceCopy = new Queue<int>();
 
-            for (int i = 0; i < n; i++)
+            int startIndex = 0;
+
+            while (true)
             {
-                currentFuel = petrol.Peek();
-                for (int x = 0; x < n; x++)
+                int totalLitersOfPetrol = 0;
+                bool isTourComplete = true;
+
+                foreach (int[] item in queue)
                 {
-                    if (distance.Peek() <= currentFuel)
+                    int currentLiters = item[0];
+                    int currentDistance = item[1];
+
+                    totalLitersOfPetrol += currentLiters;
+
+                    if (totalLitersOfPetrol - currentDistance < 0)
                     {
-                        currentFuel -= distance.Peek();
-                        if (x == n - 1)
-                        {
-                            Console.WriteLine(i);
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        for (int y = x; y < n; y++)
-                        {
-                            petrol.Enqueue(petrol.Dequeue());
-                            distance.Enqueue(distance.Dequeue());
-                        }
+                        startIndex++;
+                        int[] currentPump = queue.Dequeue();
+                        queue.Enqueue(currentPump);
+                        isTourComplete = false;
                         break;
                     }
-                    petrol.Enqueue(petrol.Dequeue());
-                    distance.Enqueue(distance.Dequeue());
-                    currentFuel += petrol.Peek();
+
+                    totalLitersOfPetrol -= currentDistance;
                 }
-                petrol.Enqueue(petrol.Dequeue());
-                distance.Enqueue(distance.Dequeue());
+
+                if (isTourComplete)
+                {
+                    Console.WriteLine(startIndex);
+                    break;
+                }
+
             }
         }
     }
