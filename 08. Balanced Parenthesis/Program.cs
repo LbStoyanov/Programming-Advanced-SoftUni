@@ -9,84 +9,50 @@ namespace _08._Balanced_Parenthesis
         static void Main(string[] args)
         {
             var parentesis = Console.ReadLine().ToCharArray();
+            bool isBalanced = true;
+            Stack<char> stack = new Stack<char>();
 
-            Queue<char> queue = new Queue<char>();
-
-            for (int i = 0; i < parentesis.Length; i++)
+            foreach (var item in parentesis)
             {
-                queue.Enqueue(parentesis[i]);
-            }
-
-            Queue<char> reversedQueue = new Queue<char>();
-
-            for (int i = parentesis.Length - 1; i >= 0; i--)
-            {
-                reversedQueue.Enqueue(parentesis[i]);
-            }
-
-            if (parentesis.Length % 2 == 0)
-            {
-                bool isBalanced = true;
-
-                for (int i = 0; i < parentesis.Length / 2; i++)
+                if (item == '{'||item == '['||item=='(')
                 {
-                    var currentChar = parentesis[i];
-                    var firsPart = queue.Dequeue();
-                    var secondPart = reversedQueue.Dequeue();
-
-                    if (currentChar == '(')
-                    {
-                        if (firsPart == '(' && secondPart == ')')
-                        {
-                            continue;
-                        }
-                        else
-                        {
-                            isBalanced = false;
-                            break;
-                        }
-
-                    }
-                    else if (currentChar == '[')
-                    {
-                        if (firsPart == '[' && secondPart == ']')
-                        {
-                            continue;
-                        }
-                        else
-                        {
-                            isBalanced = false;
-                            break;
-                        }
-                    }
-                    else if (currentChar == '{')
-                    {
-                        if (firsPart == '{' && secondPart == '}')
-                        {
-                            continue;
-                        }
-                        else
-                        {
-                            isBalanced = false;
-                            break;
-                        }
-                    }
+                    stack.Push(item);
+                    continue;
                 }
 
-                if (isBalanced)
+                if (stack.Count == 0)
                 {
-                    Console.WriteLine("YES");
+                    isBalanced = false;
+                    break;
+                }
+
+                if (item == '}'&& stack.Peek() == '{')
+                {
+                    stack.Pop();
+                }
+                else if (item == ']' && stack.Peek() == '[')
+                {
+                    stack.Pop();
+                }
+                else if (item == ')' && stack.Peek() == '(')
+                {
+                    stack.Pop();
                 }
                 else
                 {
-                    Console.WriteLine("NO");
+                    isBalanced = false;
+                    break;
                 }
             }
-            else
+
+            if (!isBalanced || stack.Count > 0)
             {
                 Console.WriteLine("NO");
             }
-
+            else
+            {
+                Console.WriteLine("YES");
+            }
         }
     }
 }
