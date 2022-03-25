@@ -19,51 +19,45 @@ namespace _11._Key_Revolver
             Queue<int> bullets = new Queue<int>(bulletsCount);
 
             int currentBarrel = gunBarrelSize;
+            int bulletCounts = 0;
 
-            while (true)
+            while (bullets.Count > 0 && locks.Count > 0)
             {
                 var currentLock = locks.Peek();
                 var currentBullet = bullets.Dequeue();
+                currentBarrel--;
+                bulletCounts++;
 
                 if (currentLock < currentBullet)
                 {
                     Console.WriteLine("Ping!");
-                    currentBarrel--;
                 }
                 else
                 {
                     Console.WriteLine("Bang!");
                     locks.Dequeue();
-                    currentBarrel--;
                 }
 
-                if (currentBarrel == 0)
+                if (currentBarrel == 0 && bullets.Count > 0)
                 {
                     currentBarrel = gunBarrelSize;
-                    int totalBulletsCost = currentBarrel * priceForSingleBullet;
-                    InteligencePrice -= totalBulletsCost;
-                    if (bullets.Count > 0)
-                    {
-                        Console.WriteLine("Reloading!");
-                    }
-                }
-
-                if (locks.Count == 0)
-                {
-                    int bulletsLeft = bullets.Count;
-                    Console.WriteLine($"{bulletsLeft} bullets left. Earned ${InteligencePrice}");
-                    Environment.Exit(0);
-                }
-                
-                if (bullets.Count == 0)
-                {
-                    break;
+                    Console.WriteLine("Reloading!");
                 }
             }
 
-            int locksLeft = locks.Count;
+            
 
-            Console.WriteLine($"Couldn't get through. Locks left: {locksLeft}");
+            if (locks.Count > 0)
+            {
+                int locksLeft = locks.Count;
+                Console.WriteLine($"Couldn't get through. Locks left: {locksLeft}");
+            }
+            else
+            {
+                int moneyEarned = InteligencePrice - (bulletCounts * priceForSingleBullet);
+                int bulletsLeft = bullets.Count;
+                Console.WriteLine($"{bulletsLeft} bullets left. Earned ${moneyEarned}");
+            }
         }
     }
 }
