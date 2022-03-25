@@ -15,7 +15,7 @@ namespace _12._Cups_and_Bottles
             Stack<int> bottles = new Stack<int>(bottlesWithWater);
             Stack<int> cups = new Stack<int>(cupsCapacity);
             int wastedWater = 0;
-            
+
 
             while (true)
             {
@@ -30,12 +30,10 @@ namespace _12._Cups_and_Bottles
                 }
                 else
                 {
-                    
-                    int modifiedCup = currentCup - currentBottle;
+
+                    wastedWater += currentCup - currentBottle;
                     bottles.Pop();
                     cups.Pop();
-                    cups.Push(modifiedCup);
-                    wastedWater = 0;
                 }
 
                 if (bottles.Count == 0 || cups.Count == 0)
@@ -51,11 +49,11 @@ namespace _12._Cups_and_Bottles
                 {
                     listOfCupsLeft.Add(cups.Pop());
                 }
-                Console.WriteLine($"Cups: {string.Join(" ",listOfCupsLeft)}");
+                Console.WriteLine($"Cups: {string.Join(" ", listOfCupsLeft)}");
             }
-            else if(bottles.Count > 0)
+            else if (bottles.Count > 0)
             {
-                Console.WriteLine($"Bottles: {bottles.Count}");
+                Console.WriteLine($"Bottles: {string.Join(" ",bottles)}");
             }
 
             Console.WriteLine($"Wasted litters of water: {wastedWater}");
