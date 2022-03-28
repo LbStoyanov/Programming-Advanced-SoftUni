@@ -45,8 +45,6 @@ namespace _2._Squares_in_Matrix
                         {
                             squareMatrixCount++;
                         }
-
-                        
                     }
                 }
             }
