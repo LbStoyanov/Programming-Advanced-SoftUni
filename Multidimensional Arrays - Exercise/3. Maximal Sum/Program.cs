@@ -12,10 +12,10 @@ namespace _3._Maximal_Sum
             int rows = matrixSize[0];
             int cols = matrixSize[1];
 
-            if (rows < 0 || cols < 0)
-            {
-                return;
-            }
+            //if (rows < 0 || cols < 0)
+            //{
+            //    return;
+            //}
 
             int[,] matrix = new int[rows, cols];
 
