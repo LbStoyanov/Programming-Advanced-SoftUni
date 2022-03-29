@@ -1,116 +1,87 @@
 ﻿using System;
 using System.Linq;
 
-namespace _6._Jagged_Array_Manipulator
+namespace JaggedArrayManipulator
 {
-    internal class Program
+    class Program
     {
         static void Main(string[] args)
         {
-            int matrixRows = int.Parse(Console.ReadLine());
-
-            if (matrixRows == 0)
+            int rows = int.Parse(Console.ReadLine());
+            double[][] jaggedArray = new double[rows][];
+            for (int row = 0; row < rows; row++) // read the jaggedArray
             {
-                return;
+                double[] currentRow = Console.ReadLine().Split().Select(double.Parse).ToArray();
+                jaggedArray[row] = currentRow;
             }
 
-            double[][] matrix = new double[matrixRows][];
-
-            for (int row = 0; row < matrix.GetLength(0); row++)
+            for (int row = 0; row < rows - 1; row++) // start analyzing the jaggedArray
             {
-                double[] colsInput = Console.ReadLine().Split(" ",StringSplitOptions.RemoveEmptyEntries).Select(double.Parse).ToArray();
-                matrix[row] = new double[colsInput.Length];
-
-                for (int col = 0; col < colsInput.Length; col++)
+                if (jaggedArray[row].Length == jaggedArray[row + 1].Length)
                 {
-                    matrix[row][col] = colsInput[col];
+                    MultiplyEachElementInBothArrays(jaggedArray, row);
                 }
-            }
 
-            for (int row = 0; row < matrix.GetLength(0) - 1; row++)
-            {
-                if (matrix[row].Length == matrix[row + 1].Length /*&& row + 1 < matrix.GetLength(0) - 1*/)
+                else
                 {
-                    for (int col = 0; col < matrix[row].Length; col++)
-                    {
-                        matrix[row][col] *= 2;
-                        matrix[row + 1][col] *= 2;
-                    }
-                }
-                else if(row + 1 <= matrix.GetLength(0) - 1)
-                {
-                    int maxLengh = 0;
-                    if (matrix[row].Length > matrix[row + 1].Length)
-                    {
-                        maxLengh = matrix[row].Length;
-                    }
-                    else
-                    {
-                        maxLengh = matrix[row + 1].Length;
-                    }
-
-                    for (int col = 0; col < maxLengh; col++)
-                    {
-                        if (matrix[row].Length > col)
-                        {
-                            matrix[row ][col] /= 2;
-                        }
-                        if (matrix[row + 1].Length > col)
-                        {
-                            matrix[row + 1][col] /= 2;
-                        }
-                    }
+                    DivideEachElementInBothArrays(jaggedArray, row);
                 }
             }
 
-            string commands = Console.ReadLine();
-
-            while (commands != "End")
+            while (true) // check for valid commands
             {
-                string[] operations = commands.Split(" ");
-                string mainOperation = operations[0];
-
-                if (mainOperation == "Add")
+                string command = Console.ReadLine();
+                if (command == "End")
                 {
-                    int row = int.Parse(operations[1]);
-                    int col = int.Parse(operations[2]);
-                    double value = int.Parse(operations[3]);
-                    if (row < 0 || row > matrix.GetLength(0) || col < 0 || col > matrix[row].Length)
+                    foreach (double[] currentRow in jaggedArray)
                     {
-                        commands = Console.ReadLine();
-                        continue;
+                        Console.WriteLine(string.Join(" ", currentRow));
                     }
 
-                    matrix[row][col] += value;
-
+                    break;
                 }
-                else if(mainOperation == "Subtract")
+
+                string[] commandArray = command.Split().ToArray();
+                int row = int.Parse(commandArray[1]);
+                int col = int.Parse(commandArray[2]);
+                int value = int.Parse(commandArray[3]);
+                if (commandArray[0] == "Add" && row >= 0 && row <= rows - 1 && col >= 0 && col <= jaggedArray[row].Length - 1)
                 {
-                    int row = int.Parse(operations[1]);
-                    int col = int.Parse(operations[2]);
-                    double value = int.Parse(operations[3]);
-
-                    if (row < 0 || row > matrix.GetLength(0) || col < 0 || col > matrix[row].Length)
-                    {
-                        commands = Console.ReadLine();
-                        continue;
-                    }
-
-                    matrix[row][col] -= value;
+                    jaggedArray[row][col] += value;
                 }
 
-                commands = Console.ReadLine();
+                else if (commandArray[0] == "Subtract" && row >= 0 && row <= rows - 1 && col >= 0 && col <= jaggedArray[row].Length - 1)
+                {
+                    jaggedArray[row][col] -= value;
+                }
             }
+        }
 
-            for (int row = 0; row < matrix.GetLength(0); row++)
+
+        private static void DivideEachElementInBothArrays(double[][] jaggedArray, int row)
+        {
+            for (int i = 0; i < jaggedArray[row].Length; i++)
             {
-                for (int col = 0; col < matrix[row].Length; col++)
-                {
-                    Console.Write(matrix[row][col] + " ");
-                }
-                Console.WriteLine();
+                jaggedArray[row][i] = jaggedArray[row][i] / 2;
             }
 
+            for (int i = 0; i < jaggedArray[row + 1].Length; i++)
+            {
+                jaggedArray[row + 1][i] = jaggedArray[row + 1][i] / 2;
+            }
+        }
+
+        private static void MultiplyEachElementInBothArrays(double[][] jaggedArray, int row)
+        {
+            for (int i = 0; i < jaggedArray[row].Length; i++)
+            {
+                jaggedArray[row][i] = jaggedArray[row][i] * 2;
+            }
+
+            for (int j = 0; j < jaggedArray[row + 1].Length; j++)
+            {
+                jaggedArray[row + 1][j] = jaggedArray[row + 1][j] * 2;
+            }
         }
     }
 }
