@@ -67,8 +67,6 @@ namespace _3._Maximal_Sum
                 }
                 Console.WriteLine();
             }
-
-           
         }
     }
 }

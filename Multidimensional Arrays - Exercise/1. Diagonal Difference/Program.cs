@@ -23,26 +23,24 @@ namespace _1._Diagonal_Difference
                 }
             }
 
-            Console.WriteLine(matrix.GetLength(0) - 1);
-            Console.WriteLine(matrix.GetLength(1));
-            //for (int row = 0; row < matrixSize; row++)
-            //{
-            //    for (int col = 0; col < matrixSize; col++)
-            //    {
-            //        if (col == row)
-            //        {
-            //            primaryDiagonalSum += matrix[row, col];
-            //        }
-            //        if ((row + col) == (matrixSize - 1))
-            //        {
-            //            secondaryDiagonalSum += matrix[row, col];
-            //        }
-            //    }
-            //}
+            for (int row = 0; row < matrixSize; row++)
+            {
+                for (int col = 0; col < matrixSize; col++)
+                {
+                    if (col == row)
+                    {
+                        primaryDiagonalSum += matrix[row, col];
+                    }
+                    if ((row + col) == (matrixSize - 1))
+                    {
+                        secondaryDiagonalSum += matrix[row, col];
+                    }
+                }
+            }
 
-            
-            //int result = Math.Abs(primaryDiagonalSum - secondaryDiagonalSum);
-            //Console.WriteLine(result);
+
+            int result = Math.Abs(primaryDiagonalSum - secondaryDiagonalSum);
+            Console.WriteLine(result);
 
         }
     }
