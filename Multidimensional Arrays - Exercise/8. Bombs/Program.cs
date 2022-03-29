@@ -13,7 +13,7 @@ namespace _8._Bombs
 
             for (int row = 0; row < matrix.GetLength(0); row++)
             {
-                int[] input = Console.ReadLine().Split(" ").Select(int.Parse).ToArray();
+                int[] input = Console.ReadLine().Split(" ",StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
 
                 for (int col = 0; col < matrix.GetLength(1); col++)
                 {
@@ -29,6 +29,10 @@ namespace _8._Bombs
                 var currentBombRow = bombsCordinates[i - 1];
                 var currentBombCol = bombsCordinates[i];
                 var explosionPower = matrix[currentBombRow, currentBombCol];
+                if (matrix[currentBombRow, currentBombCol] <= 0)
+                {
+                    continue;
+                }
 
                 if (isInRange(matrix, currentBombRow - 1, currentBombCol) && matrix[currentBombRow - 1, currentBombCol] > 0)
                 {
