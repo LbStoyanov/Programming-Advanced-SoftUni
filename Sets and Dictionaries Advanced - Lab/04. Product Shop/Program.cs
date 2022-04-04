@@ -8,7 +8,7 @@ namespace _04._Product_Shop
         static void Main(string[] args)
         {
             string command;
-            SortedDictionary<string,List<string>> shopDict = new SortedDictionary<string,List<string>>();
+            SortedDictionary<string,Dictionary<string,double>> shopDict = new SortedDictionary<string,Dictionary<string,double>>();
 
             while ((command = Console.ReadLine()) != "Revision")
             {
@@ -20,24 +20,26 @@ namespace _04._Product_Shop
 
                 if (!shopDict.ContainsKey(shopName))
                 {
-                    shopDict.Add(shopName, new List<string>());
-                    shopDict[shopName].Add(product);
-                    shopDict[shopName].Add(price.ToString());
+                    shopDict.Add(shopName, new Dictionary<string, double> { { product, price }});
                 }
                 else
                 {
-                    if (shopDict[shopName][0] == product)
+                    if (!shopDict[shopName].ContainsKey(product))
                     {
-                        shopDict[shopName].Add(price.ToString());
-                    }
-                    else
-                    {
-
+                        shopDict[shopName].Add(product, price);
                     }
                 }
 
+            }
 
+            foreach (var shop in shopDict)
+            {
+                Console.WriteLine($"{shop.Key}->");
 
+                foreach (var product in shopDict[shop.Key])
+                {
+                    Console.WriteLine($"Product: {product.Key}, Price: {product.Value}");
+                }
             }
         }
     }
