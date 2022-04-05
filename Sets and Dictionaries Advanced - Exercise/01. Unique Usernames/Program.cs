@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace _01._Unique_Usernames
 {
@@ -16,8 +17,11 @@ namespace _01._Unique_Usernames
                 string name = Console.ReadLine();
                 uniqueNames.Add(name);
             }
-            Console.WriteLine();
-            Console.WriteLine(string.Join("\n",uniqueNames));
+
+            uniqueNames.ToList().ForEach(uniqueName => Console.WriteLine(uniqueName));
+
+            
+            //Console.WriteLine(string.Join("\n",uniqueNames));
         }
     }
 }
