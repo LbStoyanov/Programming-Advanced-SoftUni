@@ -13,7 +13,6 @@ namespace _06._Wardrobe
 
             AddRobes(wardrobe, numberOfLines);
 
-
             string[] searchCloth = Console.ReadLine().Split(" ",StringSplitOptions.RemoveEmptyEntries);
 
             string searchedColor = searchCloth[0];
@@ -25,9 +24,10 @@ namespace _06._Wardrobe
 
             for (int i = 0; i < lines; i++)
             {
-                string[] input
-                    = Console.ReadLine().Split(" -> ", StringSplitOptions.RemoveEmptyEntries);
+                string[] input = Console.ReadLine().Split(" -> ", StringSplitOptions.RemoveEmptyEntries);
+
                 string currentColor = input[0];
+                
                 string[] clothes = input[1].Split(',');
 
                 if (!wardrobe.ContainsKey(currentColor))
