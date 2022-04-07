@@ -1,6 +1,10 @@
 ﻿namespace EvenLines
 {
     using System;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+
     public class EvenLines
     {
         static void Main(string[] args)
@@ -12,7 +16,47 @@
 
         public static string ProcessLines(string inputFilePath)
         {
-            throw new NotImplementedException();
+            StreamReader streamReader = new StreamReader(inputFilePath);
+
+            StringBuilder sb = new StringBuilder();
+
+            char[] symbols = { '-', ',', '.', '!', '?' };
+
+            int counter = 0;
+
+
+
+            while (true)
+            {
+                string result = streamReader.ReadLine();
+
+                if (result == null)
+                {
+                    break;
+                }
+
+
+                if (counter % 2 != 0)
+                {
+                    counter++;
+                    continue;
+
+                }
+
+                foreach (var item in symbols)
+                {
+                    result = result.Replace(item, '@');
+                }
+
+                result = String.Join(" ", result.Split().Reverse());
+
+                sb.AppendLine(result);
+
+                counter++;
+            }
+
+
+            return sb.ToString().TrimEnd();
         }
         private static string ReverseWords(string replacedSymbols)
         {
