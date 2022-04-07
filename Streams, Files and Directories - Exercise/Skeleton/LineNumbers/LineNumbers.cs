@@ -1,6 +1,10 @@
 ﻿namespace LineNumbers
 {
     using System;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+
     public class LineNumbers
     {
         static void Main(string[] args)
@@ -13,7 +17,23 @@
 
         public static void ProcessLines(string inputFilePath, string outputFilePath)
         {
-            throw new NotImplementedException();
+            StringBuilder sb = new StringBuilder();
+
+            string[] lines = File.ReadAllLines(inputFilePath);
+
+            for (int i = 0; i < lines.Length; i++)
+            {
+                string word = lines[i];
+
+                int countOfLetters = word.Count(x => char.IsLetter(x));
+
+                int punctMarks = word.Count(x => char.IsPunctuation(x));
+
+                sb.AppendLine($"Line {i + 1}: {word} ({countOfLetters})");
+            }
+
+
+            File.WriteAllText(outputFilePath, sb.ToString().TrimEnd());
         }
     }
 }
