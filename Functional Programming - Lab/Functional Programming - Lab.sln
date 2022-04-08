@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04. Add VAT", "04. Add VAT\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05. Filter By Age", "05. Filter By Age\05. Filter By Age.csproj", "{56B0FB37-61F6-4B8B-ABCF-A3CFD7F0D5B3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05. Filter By Age-ViktorDakovSolution", "05. Filter By Age-ViktorDakovSolution\05. Filter By Age-ViktorDakovSolution.csproj", "{88F72FF2-0D81-496B-9F11-C13A363D9AD1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{56B0FB37-61F6-4B8B-ABCF-A3CFD7F0D5B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56B0FB37-61F6-4B8B-ABCF-A3CFD7F0D5B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56B0FB37-61F6-4B8B-ABCF-A3CFD7F0D5B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88F72FF2-0D81-496B-9F11-C13A363D9AD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88F72FF2-0D81-496B-9F11-C13A363D9AD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88F72FF2-0D81-496B-9F11-C13A363D9AD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88F72FF2-0D81-496B-9F11-C13A363D9AD1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
