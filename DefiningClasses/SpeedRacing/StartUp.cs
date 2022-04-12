@@ -30,10 +30,23 @@ namespace DefiningClasses
             {
                 string[] currentCarTripInfo = commands.Split(' ');
 
-                string carModel = currentCarTripInfo[0];
-                int amountOfKm = int.Parse(currentCarTripInfo[1]);
+                string carModel = currentCarTripInfo[1];
+                int amountOfKm = int.Parse(currentCarTripInfo[2]);
 
+                foreach (var car in cars)
+                {
+                    if (car.Model == carModel)
+                    {
+                        car.Drive(amountOfKm);
+                        break;
+                    }
+                }
 
+            }
+
+            foreach (var car in cars)
+            {
+                Console.WriteLine($"{car.Model} {car.FuelAmount:f2} {car.TravelledDistance}");
             }
         }
     }

@@ -18,11 +18,18 @@ namespace DefiningClasses
         public double FuelConsumptionPerKilometer { get; set; }
         public double TravelledDistance { get; set; }
 
-        public void Drive(Car car, int amountOfKm)
+        public void Drive(int amountOfKm)
         {
-            if ()
-            {
+            var fuelNeeded = this.FuelConsumptionPerKilometer * amountOfKm;
 
+            if ( fuelNeeded > this.FuelAmount)
+            {
+                Console.WriteLine($"Insufficient fuel for the drive") ;
+            }
+            else
+            {
+                this.FuelAmount -= fuelNeeded;
+                this.TravelledDistance += amountOfKm;
             }
         }
     }
