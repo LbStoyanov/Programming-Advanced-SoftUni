@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DefiningClasses", "DefiningClasses.csproj", "{C53A356D-2904-49A5-A818-F8AB1B17E172}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DateModifier", "..\05. Date Modifier\DateModifier.csproj", "{F8B4DAC1-B251-48D3-A559-4BBDA15E56B1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C53A356D-2904-49A5-A818-F8AB1B17E172}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C53A356D-2904-49A5-A818-F8AB1B17E172}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C53A356D-2904-49A5-A818-F8AB1B17E172}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C53A356D-2904-49A5-A818-F8AB1B17E172}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8B4DAC1-B251-48D3-A559-4BBDA15E56B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8B4DAC1-B251-48D3-A559-4BBDA15E56B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8B4DAC1-B251-48D3-A559-4BBDA15E56B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8B4DAC1-B251-48D3-A559-4BBDA15E56B1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {30803212-829D-4911-8E8A-18C3F7188A65}
+	EndGlobalSection
+EndGlobal
