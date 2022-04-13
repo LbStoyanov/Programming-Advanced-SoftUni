@@ -5,13 +5,15 @@ VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DefiningClasses", "DefiningClasses.csproj", "{C53A356D-2904-49A5-A818-F8AB1B17E172}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DateModifier", "..\05. Date Modifier\DateModifier.csproj", "{F8B4DAC1-B251-48D3-A559-4BBDA15E56B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DateModifier", "..\05. Date Modifier\DateModifier.csproj", "{F8B4DAC1-B251-48D3-A559-4BBDA15E56B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeedRacing", "..\SpeedRacing\SpeedRacing.csproj", "{FF001CE2-3127-4CA2-A7FB-70064B5A801D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeedRacing", "..\SpeedRacing\SpeedRacing.csproj", "{FF001CE2-3127-4CA2-A7FB-70064B5A801D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RawData", "..\RawData\RawData.csproj", "{348908A9-65B5-4E9F-BBB0-9CD6F97A508F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RawData", "..\RawData\RawData.csproj", "{348908A9-65B5-4E9F-BBB0-9CD6F97A508F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarSalesman", "..\CarSalesman\CarSalesman.csproj", "{70A42421-DC13-4648-B44D-6E31226D411D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarSalesman", "..\CarSalesman\CarSalesman.csproj", "{70A42421-DC13-4648-B44D-6E31226D411D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonTrainer", "..\PokemonTrainer\PokemonTrainer.csproj", "{F896EFB4-1977-4546-8359-DCA4992B396C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{70A42421-DC13-4648-B44D-6E31226D411D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70A42421-DC13-4648-B44D-6E31226D411D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70A42421-DC13-4648-B44D-6E31226D411D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F896EFB4-1977-4546-8359-DCA4992B396C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F896EFB4-1977-4546-8359-DCA4992B396C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F896EFB4-1977-4546-8359-DCA4992B396C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F896EFB4-1977-4546-8359-DCA4992B396C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
