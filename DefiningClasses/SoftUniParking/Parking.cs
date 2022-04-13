@@ -7,38 +7,64 @@ namespace SoftUniParking
 {
     public class Parking
     {
-        List<Car> cars;
-        int capacity;
+        
+        private int capacity;
+        private Dictionary<string,Car> cars;
         public Parking(int capacity)
         {
-            Cars = new List<Car>();
-            Capacity = capacity;
+            this.capacity = capacity;
+            cars = new Dictionary<string, Car>();
         }
-        public List<Car> Cars { get; set; }
-        public int Capacity { get; set; }
-
-        public void AddCar(Car car)
+        public int Count 
         {
-            bool isExist = false;
-            foreach (var currCar in Cars)
+            get
             {
-                if (currCar.RegistrationNumber == car.RegistrationNumber)
-                {
-                    Console.WriteLine("Car with that registration number, already exists!");
-                    isExist = true;
-                    break;
-                }
+                return cars.Count;
+            }
+        }
+
+        public string AddCar(Car car)
+        {
+            if (cars.ContainsKey(car.RegistrationNumber))
+            {
+                return "Car with that registration number, already exists!";
             }
 
-            if (!isExist)
+            if (cars.Count == capacity)
             {
-                if (Cars.Count > Capacity)
+                return "Parking is full!";
+            }
+
+            cars.Add(car.RegistrationNumber,car);
+
+            return $"Successfully added new car {car.Make} {car.RegistrationNumber}";
+        }
+
+        public string RemoveCar(string registrationNumber)
+        {
+            if (!cars.ContainsKey(registrationNumber))
+            {
+                return "Car with that registration number, doesn't exist!";
+            }
+
+            cars.Remove(registrationNumber);
+            return $"Successfully removed {registrationNumber}";
+        }
+
+        public Car GetCar(string registrationNumber)
+        {
+            return cars
+                .FirstOrDefault(x => x.Key == registrationNumber)
+                .Value;
+        }
+
+        public void RemoveSetOfRegistrationNumber(List<string> RegistrationNumbers)
+        {
+            foreach (var carReg in RegistrationNumbers)
+            {
+                if (cars.ContainsKey(carReg))
                 {
-                    Console.WriteLine("Parking is full!");
-                }
-                else
-                {
-                    Console.WriteLine($"Successfully added new car {car.Make} {car.RegistrationNumber}");
+                    cars.Remove(carReg);
                 }
             }
         }
