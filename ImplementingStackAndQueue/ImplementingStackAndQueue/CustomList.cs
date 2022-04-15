@@ -38,6 +38,8 @@ namespace ImplementingStackAndQueue
 
         public void Swap(int firstIndex, int secondIndex)
         {
+            EnsureIsInRange(firstIndex);
+            EnsureIsInRange(secondIndex);
             int firstElement = elements[firstIndex];
             elements[firstIndex] = elements[secondIndex];
             elements[secondIndex] = firstElement;
