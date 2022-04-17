@@ -6,7 +6,10 @@ namespace GenericArrayCreator
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            
+            var arr = ArrayCreator.Create(5, "1");
+
+            Console.WriteLine(String.Join("**",arr));
         }
     }
 }
