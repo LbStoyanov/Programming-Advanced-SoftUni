@@ -6,15 +6,15 @@ namespace Generics
     {
         static void Main(string[] args)
         {
-            Box<string> box = new Box<string>();
+            Box<int> box = new Box<int>();
 
             int integerValue = int.Parse(Console.ReadLine());
 
             for (int i = 0; i < integerValue; i++)
             {
-                string stringValue = Console.ReadLine();
+                int intValue = int.Parse(Console.ReadLine());
 
-                box.Items.Add(stringValue);
+                box.Items.Add(intValue);
             }
 
             Console.WriteLine(box);

@@ -6,7 +6,7 @@ namespace Generics
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            
         }
     }
 }
