@@ -8,26 +8,23 @@ namespace Generics
     {
         static void Main(string[] args)
         {
-            Box<int> box = new Box<int>();
-
-            List<int> list = new List<int>();
+            Box<double> box = new Box<double>();
 
             int n = int.Parse(Console.ReadLine());
 
             for (int i = 0; i < n; i++)
             {
-                int input = int.Parse(Console.ReadLine());
+                double input = double.Parse(Console.ReadLine());
 
-                list.Add(input);
+                box.Items.Add(input);
             }
+            
+            double elementToCompare = double.Parse(Console.ReadLine());
 
-            int[] indexes = Console.ReadLine().Split(' ',StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
+            int result = box.CompareElements(elementToCompare);
+            Console.WriteLine(result);
 
-            int firstIndex = indexes[0];
-            int secondIndex = indexes[1];
 
-            box.SwapElements(list, firstIndex, secondIndex);
-            Console.WriteLine(box);
         }
     }
 }
