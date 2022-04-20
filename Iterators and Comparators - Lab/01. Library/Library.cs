@@ -12,16 +12,20 @@ namespace IteratorsAndComparators
         {
             this.books = new List<Book>();
         }
-
-        public void Add(Book book)
+        public Library(Book bookOne,Book bookTwo,Book bookThree)
         {
-           this.books.Add(book);
+            this.books = new List<Book>() { bookOne,bookTwo,bookThree};
         }
 
-        public void Remove(Book book)
-        {
-            this.books.Remove(book);
-        }
+        //public void Add(Book book)
+        //{
+        //   this.books.Add(book);
+        //}
+
+        //public void Remove(Book book)
+        //{
+        //    this.books.Remove(book);
+        //}
         public IEnumerator<Book> GetEnumerator()
         {
            return new LibraryIterator(books);
