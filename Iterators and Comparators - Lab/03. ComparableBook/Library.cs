@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
-public class Library : IEnumerable<Book>
+public class Library : IEnumerable<Book> 
 {
     private SortedSet<Book> books;
 
@@ -23,15 +23,18 @@ public class Library : IEnumerable<Book>
         return this.GetEnumerator();
     }
 
-    private class LibraryIterator : IEnumerator<Book>
+    public class LibraryIterator : IEnumerator<Book>
     {
         private readonly List<Book> books;
+        
         private int currentIndex;
 
         public LibraryIterator(IEnumerable<Book> books)
         {
             this.Reset();
             this.books = new List<Book>(books);
+            
+            
         }
 
         public Book Current => this.books[this.currentIndex];

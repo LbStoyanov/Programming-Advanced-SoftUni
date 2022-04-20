@@ -3,37 +3,52 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
-namespace IteratorsAndComparators
+public class Library : IEnumerable<Book>
 {
-    public class Library : IEnumerable<Book>
+    private List<Book> books;
+
+    public Library(params Book[] books)
     {
-        private List<Book> books;
-        public Library()
+        this.books = new List<Book>(books);
+    }
+
+    public IEnumerator<Book> GetEnumerator()
+    {
+        return new LibraryIterator(this.books);
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return this.GetEnumerator();
+    }
+
+    public class LibraryIterator : IEnumerator<Book>
+    {
+        private readonly List<Book> books;
+        private int currentIndex;
+
+        public LibraryIterator(IEnumerable<Book> books)
         {
-            this.books = new List<Book>();
-        }
-        public Library(Book bookOne,Book bookTwo,Book bookThree)
-        {
-            this.books = new List<Book>() { bookOne,bookTwo,bookThree};
+            this.Reset();
+            this.books = new List<Book>(books);
         }
 
-        //public void Add(Book book)
-        //{
-        //   this.books.Add(book);
-        //}
+        public Book Current => this.books[this.currentIndex];
 
-        //public void Remove(Book book)
-        //{
-        //    this.books.Remove(book);
-        //}
-        public IEnumerator<Book> GetEnumerator()
+        object IEnumerator.Current => this.Current;
+
+        public void Dispose()
         {
-           return new LibraryIterator(books);
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        public bool MoveNext()
         {
-            return GetEnumerator();
+            return ++this.currentIndex < this.books.Count;
+        }
+
+        public void Reset()
+        {
+            this.currentIndex = -1;
         }
     }
 }
