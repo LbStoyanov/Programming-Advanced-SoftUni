@@ -31,9 +31,62 @@ namespace _01._Meal_Plan
             while (meals.Count != 0 || calories.Count != 0)
             {
                 var currentMeal = meals.Peek();//salad
-                var currentCalories = calories.Peek();//1500
+                var currentCalories = calories.Peek();
 
-                DailyConsumption(calories, meals);
+                if (currentMeal == "salad")
+                {
+
+                }
+                else if (currentMeal == "soup")
+                {
+
+                }
+                else if (currentMeal == "pasta")
+                {
+
+                }
+                else if (currentMeal == "steak")
+                {
+
+                }
+ 
+            }
+        }
+        public void Consumption(Queue meals, Stack<int> calories)
+        {
+            var currentMeal = meals.Peek();//salad
+            var currentCalories = calories.Peek();
+            int result = 0;
+
+            if (currentMeal == "salad")
+            {
+                result = currentCalories - 450;
+
+                if (result > 0)
+                {
+                    calories.Pop();
+                    calories.Push(result);
+                }
+                else if (result < 0)
+                {
+
+                }
+                else
+                {
+                    calories.Pop();
+                }
+            }
+            else if (currentMeal == "soup")
+            {
+
+            }
+            else if (currentMeal == "pasta")
+            {
+
+            }
+            else if (currentMeal == "steak")
+            {
+
             }
         }
 
