@@ -33,7 +33,7 @@ public class Library : IEnumerable<Book>
         {
             this.Reset();
             this.books = new List<Book>(books);
-            
+            this.books.Sort(new BookComparator());
             
         }
 
