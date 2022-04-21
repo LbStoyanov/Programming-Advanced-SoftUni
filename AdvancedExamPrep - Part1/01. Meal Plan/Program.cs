@@ -9,17 +9,21 @@ namespace _01._Meal_Plan
     {
         static void Main(string[] args)
         {
-            const int  SaladValue = 350;
-            const int  SoupValue = 490;
-            const int  PastaValue = 680;
-            const int  SteakValue = 350;
+
+            var ingredients = new Dictionary<string, int>
+            {
+                {"salad",350 },
+                {"soup",490 },
+                {"pasta",680 },
+                {"steak",790 }
+            };
 
 
             Queue meals = new Queue();
 
             Stack<int> calories = new Stack<int>();
 
-            string[] mealsInput = Console.ReadLine().Split(" ",StringSplitOptions.RemoveEmptyEntries);
+            string[] mealsInput = Console.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries);
 
             meals = AddMeals(mealsInput);
 
@@ -27,67 +31,79 @@ namespace _01._Meal_Plan
 
             calories = AddCalories(dailyCalories);
 
+            int mealsCounter = 0;
 
-            while (meals.Count != 0 || calories.Count != 0)
+            while (meals.Count != 0 && calories.Count != 0)
             {
-                var currentMeal = meals.Peek();//salad
-                var currentCalories = calories.Peek();
+                Consumption(meals, calories, ingredients);
+                mealsCounter++;
+            }
 
-                if (currentMeal == "salad")
-                {
+            if (meals.Count == 0)
+            {
+                Console.WriteLine($"John had {mealsCounter} meals.");
 
-                }
-                else if (currentMeal == "soup")
-                {
+                var caloriesList = ExtractCaloriesLeft(calories);
+                Console.WriteLine($"For the next few days, he can eat {string.Join(", ", caloriesList)} calories.");
+            }
+            else
+            {
+                Console.WriteLine($"John ate enough, he had {mealsCounter} meals.");
 
-                }
-                else if (currentMeal == "pasta")
-                {
-
-                }
-                else if (currentMeal == "steak")
-                {
-
-                }
- 
+                var mealsList = ExtractMealsLeft(meals);
+                Console.WriteLine($"Meals left: {string.Join(", ", mealsList)}.");
             }
         }
-        public void Consumption(Queue meals, Stack<int> calories)
+        public static List<string> ExtractMealsLeft(Queue meals)
         {
-            var currentMeal = meals.Peek();//salad
+            var list = new List<string>();
+            while (meals.Count != 0)
+            {
+                list.Add(meals.Dequeue().ToString());
+            }
+
+            return list;
+
+        }
+
+        public static List<int>  ExtractCaloriesLeft(Stack<int> calories)
+        {
+            var list = new List<int>();
+            while (calories.Count != 0)
+            {
+                list.Add(calories.Pop());
+            }
+
+            return list;
+            
+        }
+
+        public static void Consumption(Queue meals, Stack<int> calories, Dictionary<string, int> ingredients)
+        {
+            var currentMeal = meals.Peek().ToString();//salad
             var currentCalories = calories.Peek();
             int result = 0;
+            
 
-            if (currentMeal == "salad")
+            result = currentCalories - ingredients[currentMeal];//1500 -1600
+
+            if (result > 0)
             {
-                result = currentCalories - 450;
-
-                if (result > 0)
+                calories.Pop();
+                calories.Push(result);
+            }
+            else
+            {
+                
+                calories.Pop();
+                if (calories.Count > 0)
                 {
+                    int nextCalories = calories.Peek() + result;
                     calories.Pop();
-                    calories.Push(result);
-                }
-                else if (result < 0)
-                {
-
-                }
-                else
-                {
-                    calories.Pop();
+                    calories.Push(nextCalories);
                 }
             }
-            else if (currentMeal == "soup")
-            {
-
-            }
-            else if (currentMeal == "pasta")
-            {
-
-            }
-            else if (currentMeal == "steak")
-            {
-
-            }
+            meals.Dequeue();
         }
 
         private static Stack<int> AddCalories(int[] dailyCalories)
