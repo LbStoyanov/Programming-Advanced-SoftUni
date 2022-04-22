@@ -14,6 +14,10 @@
             this.weight = weight;
             this.lenght = lenght;
         }
+        public string Species { get; set; }
+        public string Diet { get; set; }
+        public double Weight { get; set; }
+        public double Lenght { get; set; }
 
         public override string ToString()
         {
