@@ -4,10 +4,13 @@ using System.Linq;
 
 namespace _02._Truffle_Hunter
 {
-    internal class Program
+    public class Program
     {
+       public const string BlackTruffle = "B";
+       public const string WhiteTruffle = "W";
+       public const string SummerTruffle = "S";
         static void Main(string[] args)
-        {
+        {   
             int forestSize = int.Parse(Console.ReadLine());
 
             string[,] forest = new string[forestSize, forestSize];
@@ -35,23 +38,20 @@ namespace _02._Truffle_Hunter
 
             while ((commands = Console.ReadLine()) != "Stop the hunt")
             {
-                string[] actions = commands.Split(" ", StringSplitOptions.RemoveEmptyEntries);
-                string mainAction = actions[0];
+                string[] commandParameters = commands.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                string mainAction = commandParameters[0];
+                int row = int.Parse(commandParameters[1]);
+                int col = int.Parse(commandParameters[2]);
 
                 if (mainAction == "Collect")
                 {
-                    int row = int.Parse(actions[1]);
-                    int col = int.Parse(actions[2]);
-
-                    Collect(forest, row, col, trufflesDict);
+                    CollectTruffles(forest, row, col, trufflesDict);
                 }
                 else if (mainAction == "Wild_Boar")
                 {
-                    int row = int.Parse(actions[1]);
-                    int col = int.Parse(actions[2]);
-                    string direction = actions[3];
+                    string direction = commandParameters[3];
 
-                    WildBoar(forest, row, col, direction,trufflesDict);
+                    MoveWildBoar(forest, row, col, direction, trufflesDict);
                 }
             }
 
@@ -64,206 +64,168 @@ namespace _02._Truffle_Hunter
 
             Console.WriteLine($"The wild boar has eaten {eaten} truffles.");
 
-            Print(forest);
+            PrintForest(forest);
 
         }
 
-        private static void Print(string[,] forest)
+        private static void PrintForest(string[,] forest)
         {
             for (int row = 0; row < forest.GetLength(0); row++)
             {
                 for (int col = 0; col < forest.GetLength(1); col++)
                 {
-                    Console.Write(forest[row,col] + " ");
+                    Console.Write(forest[row, col] + " ");
                 }
                 Console.WriteLine();
             }
 
         }
 
-        private static void WildBoar(string[,] forest, int row, int col, string direction, Dictionary<string, int> trufflesDict)
+        private static void MoveWildBoar(string[,] forest, int row, int col, string direction, Dictionary<string, int> trufflesDict)
         {
             if (direction == "up")
             {
-                Up(forest, row, col, trufflesDict);
+                MoveUp(forest, row, col, trufflesDict);
             }
             if (direction == "down")
             {
-                Down(forest, row, col, trufflesDict);
+                MoveDown(forest, row, col, trufflesDict);
             }
             if (direction == "left")
             {
-                Left(forest, row, col, trufflesDict);
+                MoveLeft(forest, row, col, trufflesDict);
             }
             if (direction == "right")
             {
-                Right(forest, row, col, trufflesDict);
+                MoveRight(forest, row, col, trufflesDict);
             }
         }
-        private static void Right(string[,] forest, int startRow, int startCol, Dictionary<string, int> trufflesDict)
+        private static void MoveRight(string[,] forest, int startRow, int startCol, Dictionary<string, int> trufflesDict)
         {
-            //forest[startRow, startCol] = "-";
-
-            for (int row = startRow; row < forest.GetLength(0); row++)
+            for (int col = startCol; col < forest.GetLength(1); col += 2)
             {
-                for (int col = startCol; col < forest.GetLength(1); col += 2)
+                if (col > forest.Length)
                 {
-                    //if (col + 2 > forest.Length - 1)
-                    //{
-                    //    return;
-                    //}
-                    if (forest[row, col] == "B")
-                    {
-                        trufflesDict["eaten"]++;
-                        forest[row, col] = "-";
-                    }
-                    if (forest[row, col] == "S")
-                    {
-                        trufflesDict["eaten"]++;
-                        forest[row, col] = "-";
-                    }
-                    if (forest[row, col] == "W")
-                    {
-                        trufflesDict["eaten"]++;
-                        forest[row, col] = "-";
-                    }
-                    
+                    break;
                 }
-                break;
+                if (forest[startRow, col] == BlackTruffle)
+                {
+                    trufflesDict["eaten"]++;
+                    forest[startRow, col] = "-";
+                }
+                if (forest[startRow, col] == SummerTruffle)
+                {
+                    trufflesDict["eaten"]++;
+                    forest[startRow, col] = "-";
+                }
+                if (forest[startRow, col] == WhiteTruffle)
+                {
+                    trufflesDict["eaten"]++;
+                    forest[startRow, col] = "-";
+                }
             }
         }
 
-        private static void Left(string[,] forest, int startRow, int startCol, Dictionary<string, int> trufflesDict)
+        private static void MoveLeft(string[,] forest, int startRow, int startCol, Dictionary<string, int> trufflesDict)
         {
-            //forest[startRow, startCol] = "-";
-
-            for (int row = startRow; row < forest.GetLength(0); row++)
+            for (int col = startCol; col < forest.GetLength(1); col -= 2)
             {
-                for (int col = startCol; col < forest.GetLength(1); col-=2)
+                if (col < 0)
                 {
-                    if (forest[row, col] == "B")
-                    {
-                       
-                        trufflesDict["eaten"]++;
-                        forest[row, col] = "-";
-                    }
-                    if (forest[row, col] == "S")
-                    {
-                       
-                        trufflesDict["eaten"]++;
-                        forest[row, col] = "-";
-                    }
-                    if (forest[row, col] == "W")
-                    {
-                        
-                        trufflesDict["eaten"]++;
-                        forest[row, col] = "-";
-                    }
-
-                    //if (col - 2 < 0)
-                    //{
-                    //    return;
-                    //}
+                    break;
                 }
-                break;
+                if (forest[startRow, col] == "B")
+                {
+
+                    trufflesDict["eaten"]++;
+                    forest[startRow, col] = "-";
+                }
+                if (forest[startRow, col] == "S")
+                {
+
+                    trufflesDict["eaten"]++;
+                    forest[startRow, col] = "-";
+                }
+                if (forest[startRow, col] == "W")
+                {
+
+                    trufflesDict["eaten"]++;
+                    forest[startRow, col] = "-";
+                }
             }
         }
 
-        private static void Down(string[,] forest, int startRow, int startCol, Dictionary<string, int> trufflesDict)
+        private static void MoveDown(string[,] forest, int startRow, int startCol, Dictionary<string, int> trufflesDict)
         {
-            //forest[startRow, startCol] = "-";
+            for (int row = startRow; row < forest.GetLength(0); row += 2)
+            {
+                if (row > forest.Length)
+                {
+                    break;
+                }
+                if (forest[row, startCol] == "B")
+                {
+                    trufflesDict["eaten"]++;
+                    forest[row, startCol] = "-";
+                }
+                if (forest[row, startCol] == "S")
+                {
+                    trufflesDict["eaten"]++;
+                    forest[row, startCol] = "-";
+                }
+                if (forest[row, startCol] == "W")
+                {
+                    trufflesDict["eaten"]++;
+                    forest[row, startCol] = "-";
+                }
+            }
+        }
 
+        private static void MoveUp(string[,] forest, int startRow, int startCol, Dictionary<string, int> trufflesDict)
+        {
             for (int row = startRow; row < forest.GetLength(0); row -= 2)
             {
-                for (int col = startCol; col < forest.GetLength(1); col++)
+                if (row < 0)
                 {
-                    if (row + 2 > forest.Length - 1)
-                    {
-                        return;
-                    }
-                    row += 2;
-
-                    if (forest[row, col] == "B")
-                    {
-                        
-                        trufflesDict["eaten"]++;
-                        forest[row, col] = "-";
-                    }
-                    if (forest[row, col] == "S")
-                    {
-                        
-                        trufflesDict["eaten"]++;
-                        forest[row, col] = "-";
-                    }
-                    if (forest[row, col] == "W")
-                    {
-                        
-                        trufflesDict["eaten"]++;
-                        forest[row, col] = "-";
-                    }
+                    break;
                 }
+                if (forest[row, startCol] == "B")
+                {
+                    trufflesDict["eaten"]++;
+                    forest[row, startCol] = "-";
+                }
+                if (forest[row, startCol] == "S")
+                {
+                    trufflesDict["eaten"]++;
+                    forest[row, startCol] = "-";
+                }
+                if (forest[row, startCol] == "W")
+                {
+                    trufflesDict["eaten"]++;
+                    forest[row, startCol] = "-";
+                }
+                
             }
         }
 
-        private static void Up(string[,] forest, int startRow, int startCol, Dictionary<string, int> trufflesDict)
+        private static void CollectTruffles(string[,] forest, int truffleRow, int truffleCol, Dictionary<string, int> trufflesDict)
         {
-            //forest[startRow, startCol] = "-";
-            if (forest[startRow, startCol] != "-")
+            if (isInRange(forest, truffleRow, truffleCol))
             {
-                forest[startRow, startCol] = "-";
-                trufflesDict["eaten"]++;
-            }
-
-            for (int row = startRow; row < forest.GetLength(0); row++)
-            {
-                for (int col = startCol; col < forest.GetLength(1); col++)
-                {
-                    if (row - 2 < 0)
-                    {
-                        return;
-                    }
-                    row -= 2;
-
-                    if (forest[row,col] == "B")
-                    {
-                        
-                        trufflesDict["eaten"]++;
-                        forest[row, col] = "-";
-                    }
-                    if (forest[row, col] == "S")
-                    {
-                        
-                        trufflesDict["eaten"]++;
-                        forest[row, col] = "-";
-                    }
-                    if (forest[row, col] == "W")
-                    {
-                        
-                        trufflesDict["eaten"]++;
-                        forest[row, col] = "-";
-                    }
-                }
-            }
-        }
-
-        private static void Collect(string[,] forest, int row, int col, Dictionary<string, int> trufflesDict)
-        {
-            if (isInRange(forest, row, col))
-            {
-                if (forest[row, col] == "B")
+                if (forest[truffleRow, truffleCol] == "B")
                 {
                     trufflesDict["black"]++;
-                    forest[row, col] = "-";
+                    forest[truffleRow, truffleCol] = "-";
                 }
-                if (forest[row, col] == "S")
+                if (forest[truffleRow, truffleCol] == "S")
                 {
                     trufflesDict["summer"]++;
-                    forest[row, col] = "-";
+                    forest[truffleRow, truffleCol] = "-";
                 }
-                if (forest[row, col] == "W")
+                if (forest[truffleRow, truffleCol] == "W")
                 {
                     trufflesDict["white"]++;
-                    forest[row, col] = "-";
+                    forest[truffleRow, truffleCol] = "-";
                 }
             }
         }
