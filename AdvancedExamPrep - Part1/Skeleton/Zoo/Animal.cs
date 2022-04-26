@@ -9,10 +9,10 @@
 
         public Animal(string species,string diet,double weight,double lenght)
         {
-            this.species = species;
-            this.diet = diet;
-            this.weight = weight;
-            this.lenght = lenght;
+            this.Species = species;
+            this.Diet = diet;
+            this.Weight = weight;
+            this.Lenght = lenght;
         }
         public string Species { get; set; }
         public string Diet { get; set; }
@@ -21,7 +21,7 @@
 
         public override string ToString()
         {
-            return $"The {this.species} is a {this.diet} and weighs {this.weight} kg.";
+            return $"The {this.Species} is a {this.Diet} and weighs {this.Weight} kg.";
         }
     }
 }
