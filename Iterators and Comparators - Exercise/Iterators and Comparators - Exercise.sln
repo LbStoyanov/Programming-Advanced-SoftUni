@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01. ListyIterator", "01. Li
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03. Stack", "03. Stack\03. Stack.csproj", "{6DB09D79-7745-4333-BC12-B39CEFF109EF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04. Froggy", "04. Froggy\04. Froggy.csproj", "{B33D9706-C76D-46C2-AFE2-61A9AFBB69F6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{6DB09D79-7745-4333-BC12-B39CEFF109EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DB09D79-7745-4333-BC12-B39CEFF109EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DB09D79-7745-4333-BC12-B39CEFF109EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B33D9706-C76D-46C2-AFE2-61A9AFBB69F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B33D9706-C76D-46C2-AFE2-61A9AFBB69F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B33D9706-C76D-46C2-AFE2-61A9AFBB69F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B33D9706-C76D-46C2-AFE2-61A9AFBB69F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
