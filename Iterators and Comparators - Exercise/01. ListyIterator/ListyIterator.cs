@@ -5,7 +5,7 @@ using System.Text;
 
 namespace IteratorsAndComparators
 {
-    public class ListyIterator<T>
+    public class ListyIterator<T> : IEnumerable<T>
     {
         private readonly List<T> elements;
         private int index;
@@ -45,6 +45,19 @@ namespace IteratorsAndComparators
             }
 
             Console.WriteLine(elements[index]);
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            foreach (var item in elements)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
         }
     }
     

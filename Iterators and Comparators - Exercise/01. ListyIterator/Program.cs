@@ -36,6 +36,15 @@ namespace IteratorsAndComparators
                     {
                         listyIterator.Print();
                     }
+
+                    if (command == "PrintAll")
+                    {
+                        foreach (var item in listyIterator)
+                        {
+                            Console.Write(item + " ");
+                        }
+                        Console.WriteLine();
+                    }
                 }
             }
             catch (Exception ex)
