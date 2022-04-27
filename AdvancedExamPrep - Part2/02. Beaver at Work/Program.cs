@@ -18,15 +18,16 @@ namespace _02._Beaver_at_Work
         public Stack<string> CollectedWoods { get; set; }
         public int TotalCountOfBranches { get; set; }
 
-
     }
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            var woodBranches = new Dictionary<string, int>();
-
             int pondSize = int.Parse(Console.ReadLine());
+            if (pondSize < 1)
+            {
+                return;
+            }
 
             string[,] pond = new string[pondSize, pondSize];
 
@@ -39,20 +40,18 @@ namespace _02._Beaver_at_Work
                 for (int col = 0; col < rowInput.Length; col++)
                 {
                     pond[row, col] = rowInput[col];
-                    if (pond[row,col] == "B")
+                    if (pond[row, col] == "B")
                     {
                         beaver.RowPosition = row;
                         beaver.ColPosition = col;
                     }
 
-                    if (pond[row,col] != "B" && pond[row,col] != "-" && pond[row,col] != "F")
+                    if (pond[row, col] != "B" && pond[row, col] != "-" && pond[row, col] != "F")
                     {
                         beaver.TotalCountOfBranches++;
                     }
                 }
             }
-
-           
 
             string directionToMoveTheBeaver;
 
@@ -72,12 +71,95 @@ namespace _02._Beaver_at_Work
                 }
                 if (directionToMoveTheBeaver == "right")
                 {
-
+                    MoveTheBeaverRight(pond, beaver);
                 }
 
             }
 
+            if (beaver.TotalCountOfBranches == 0)
+            {
+                Console.Write($"The Beaver successfully collect {beaver.CollectedWoods.Count} wood branches: ");
 
+                while (beaver.CollectedWoods.Count > 0)
+                {
+                    Console.Write($"{beaver.CollectedWoods.Pop()}, ");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"The Beaver failed to collect every wood branch. There are {beaver.TotalCountOfBranches} branches left.");
+            }
+
+            PrintThePondState(pond);
+
+        }
+
+        private static void PrintThePondState(string[,] pond)
+        {
+            for (int row = 0; row < pond.GetLength(0); row++)
+            {
+                for (int col = 0; col < pond.GetLength(1); col++)
+                {
+                    Console.Write(pond[row,col] + " ");
+                }
+                Console.WriteLine();
+            }
+
+        }
+
+        static void MoveTheBeaverRight(string[,] pond, Beaver beaver)
+        {
+            if (!isInPond(pond, beaver.RowPosition, beaver.ColPosition + 1))
+            {
+                if (beaver.CollectedWoods.Count > 0)
+                {
+                    beaver.CollectedWoods.Pop();
+                }
+
+                return;
+            }
+            else
+            {
+                if (pond[beaver.RowPosition, beaver.ColPosition + 1] == "-")
+                {
+                    pond[beaver.RowPosition, beaver.ColPosition] = "-";
+                    pond[beaver.RowPosition, beaver.ColPosition + 1] = "B";
+                    beaver.ColPosition++;
+                }
+                else if (pond[beaver.RowPosition, beaver.ColPosition + 1] == "F")
+                {
+                    if (beaver.ColPosition + 1 < pond.GetLength(0) - 1)
+                    {
+                        pond[beaver.RowPosition, beaver.ColPosition] = "-";
+                        pond[beaver.RowPosition, beaver.ColPosition + 1] = "-";
+                        beaver.ColPosition = pond.GetLength(1) - 1;
+                        pond[beaver.RowPosition, beaver.ColPosition] = "B";
+                    }
+                    else
+                    {
+                        pond[beaver.RowPosition, beaver.ColPosition] = "-";
+                        pond[beaver.RowPosition, beaver.ColPosition + 1] = "-";
+                        beaver.ColPosition = 0;
+                        if (pond[beaver.RowPosition, beaver.ColPosition] != "-")
+                        {
+                            string currentWood = pond[beaver.RowPosition, beaver.ColPosition];
+
+                            beaver.CollectedWoods.Push(currentWood);
+                            beaver.TotalCountOfBranches--;
+                        }
+                        pond[beaver.RowPosition, beaver.ColPosition] = "B";
+                    }
+                }
+                else
+                {
+                    string currentWood = pond[beaver.RowPosition, beaver.ColPosition + 1];
+                    beaver.CollectedWoods.Push(currentWood);
+                    beaver.TotalCountOfBranches--;
+                    pond[beaver.RowPosition, beaver.ColPosition] = "-";
+                    pond[beaver.RowPosition, beaver.ColPosition + 1] = "B";
+                    beaver.ColPosition++;
+                }
+            }
         }
         static void MoveTheBeaverLeft(string[,] pond, Beaver beaver)
         {
@@ -100,7 +182,7 @@ namespace _02._Beaver_at_Work
                 }
                 else if (pond[beaver.RowPosition, beaver.ColPosition - 1] == "F")
                 {
-                    if (beaver.ColPosition - 2 > 0)
+                    if (beaver.ColPosition - 1 > 0)
                     {
                         pond[beaver.RowPosition, beaver.ColPosition] = "-";
                         pond[beaver.RowPosition, beaver.ColPosition - 1] = "-";
@@ -111,7 +193,7 @@ namespace _02._Beaver_at_Work
                     {
                         pond[beaver.RowPosition, beaver.ColPosition] = "-";
                         pond[beaver.RowPosition, beaver.ColPosition - 1] = "-";
-                        beaver.ColPosition = 0;
+                        beaver.ColPosition = pond.GetLength(1) - 1;
                         if (pond[beaver.RowPosition, beaver.ColPosition] != "-")
                         {
                             string currentWood = pond[beaver.RowPosition, beaver.ColPosition];
@@ -129,6 +211,7 @@ namespace _02._Beaver_at_Work
                     beaver.TotalCountOfBranches--;
                     pond[beaver.RowPosition, beaver.ColPosition] = "-";
                     pond[beaver.RowPosition, beaver.ColPosition - 1] = "B";
+                    beaver.ColPosition--;
                 }
             }
         }
@@ -149,7 +232,7 @@ namespace _02._Beaver_at_Work
                 {
                     pond[beaver.RowPosition, beaver.ColPosition] = "-";
                     pond[beaver.RowPosition + 1, beaver.ColPosition] = "B";
-                    beaver.RowPosition--;
+                    beaver.RowPosition++;
                 }
                 else if (pond[beaver.RowPosition + 1, beaver.ColPosition] == "F")
                 {
@@ -157,7 +240,7 @@ namespace _02._Beaver_at_Work
                     {
                         pond[beaver.RowPosition, beaver.ColPosition] = "-";
                         pond[beaver.RowPosition + 1, beaver.ColPosition] = "-";
-                        beaver.RowPosition = pond.GetLength(0) - 1;
+                        beaver.RowPosition = 0;
                         pond[beaver.RowPosition, beaver.ColPosition] = "B";
                     }
                     else
@@ -177,23 +260,24 @@ namespace _02._Beaver_at_Work
                 }
                 else
                 {
-                    string currentWood = pond[beaver.RowPosition, beaver.ColPosition];
+                    string currentWood = pond[beaver.RowPosition + 1, beaver.ColPosition];
                     beaver.CollectedWoods.Push(currentWood);
                     beaver.TotalCountOfBranches--;
                     pond[beaver.RowPosition, beaver.ColPosition] = "-";
                     pond[beaver.RowPosition + 1, beaver.ColPosition] = "B";
+                    beaver.RowPosition++;
                 }
             }
         }
         static void MoveTheBeaverUp(string[,] pond, Beaver beaver)
         {
-            if (!isInPond(pond,beaver.RowPosition - 1,beaver.ColPosition))
+            if (!isInPond(pond, beaver.RowPosition - 1, beaver.ColPosition))
             {
                 if (beaver.CollectedWoods.Count > 0)
                 {
                     beaver.CollectedWoods.Pop();
                 }
-                 
+
                 return;
             }
             else
@@ -218,7 +302,7 @@ namespace _02._Beaver_at_Work
                         pond[beaver.RowPosition, beaver.ColPosition] = "-";
                         pond[beaver.RowPosition - 1, beaver.ColPosition] = "-";
                         beaver.RowPosition = pond.GetLength(0) - 1;
-                        if (pond[beaver.RowPosition,beaver.ColPosition] != "-")
+                        if (pond[beaver.RowPosition, beaver.ColPosition] != "-")
                         {
                             string currentWood = pond[beaver.RowPosition, beaver.ColPosition];
 
@@ -230,9 +314,12 @@ namespace _02._Beaver_at_Work
                 }
                 else
                 {
-                    string currentWood = pond[beaver.RowPosition, beaver.ColPosition];
+                    string currentWood = pond[beaver.RowPosition - 1, beaver.ColPosition];
                     beaver.CollectedWoods.Push(currentWood);
                     beaver.TotalCountOfBranches--;
+                    pond[beaver.RowPosition, beaver.ColPosition] = "-";
+                    pond[beaver.RowPosition - 1, beaver.ColPosition] = "B";
+                    beaver.RowPosition--;
                 }
             }
         }
