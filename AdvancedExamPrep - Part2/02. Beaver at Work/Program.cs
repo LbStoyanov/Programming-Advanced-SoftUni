@@ -55,7 +55,7 @@ namespace _02._Beaver_at_Work
 
             string directionToMoveTheBeaver;
 
-            while ((directionToMoveTheBeaver = Console.ReadLine()) != "end" || beaver.TotalCountOfBranches == 0)
+            while ((directionToMoveTheBeaver = Console.ReadLine()) != "end")
             {
                 if (directionToMoveTheBeaver == "up")
                 {
@@ -74,16 +74,24 @@ namespace _02._Beaver_at_Work
                     MoveTheBeaverRight(pond, beaver);
                 }
 
+                if (beaver.TotalCountOfBranches == 0)
+                {
+                    break;
+                }
             }
 
             if (beaver.TotalCountOfBranches == 0)
             {
-                Console.Write($"The Beaver successfully collect {beaver.CollectedWoods.Count} wood branches: ");
+                var beaverCollectedWoodsList = new List<string>();
 
                 while (beaver.CollectedWoods.Count > 0)
                 {
-                    Console.Write($"{beaver.CollectedWoods.Pop()}, ");
+                    beaverCollectedWoodsList.Add(beaver.CollectedWoods.Pop());
                 }
+                beaverCollectedWoodsList.Reverse();
+
+                Console.Write($"The Beaver successfully collect {beaverCollectedWoodsList.Count} wood branches: {string.Join(", ", beaverCollectedWoodsList)}.");
+                Console.WriteLine();
             }
             else
             {
@@ -94,13 +102,13 @@ namespace _02._Beaver_at_Work
 
         }
 
-        private static void PrintThePondState(string[,] pond)
+        public static void PrintThePondState(string[,] pond)
         {
             for (int row = 0; row < pond.GetLength(0); row++)
             {
                 for (int col = 0; col < pond.GetLength(1); col++)
                 {
-                    Console.Write(pond[row,col] + " ");
+                    Console.Write(pond[row, col] + " ");
                 }
                 Console.WriteLine();
             }
@@ -168,6 +176,7 @@ namespace _02._Beaver_at_Work
                 if (beaver.CollectedWoods.Count > 0)
                 {
                     beaver.CollectedWoods.Pop();
+
                 }
 
                 return;
