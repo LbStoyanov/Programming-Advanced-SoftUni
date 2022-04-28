@@ -6,11 +6,6 @@ namespace _01._Blacksmith
 {
     internal class Program
     {
-        //public const int GladiusResourseNeeded = 70;
-        //public const int ShamirResourseNeeded = 80;
-        //public const int KatanaResourseNeeded = 90;
-        //public const int SarbeResourseNeeded = 110;
-        //public const int BroadswordResourseNeeded = 150;
         static void Main(string[] args)
         {
             Queue<int> steel = new Queue<int>();
@@ -25,7 +20,7 @@ namespace _01._Blacksmith
 
             AddCarbon(carbon, carbonInput);
 
-            //Check if there is already that kind of sword made!!!
+            
             var forgedSwords = new Dictionary<string, List<int>>
             {
                 {"Gladius",new List<int>{ 70,0} },
@@ -36,9 +31,60 @@ namespace _01._Blacksmith
             };
             
 
-            while (steel.Count > 0 || carbon.Count > 0)
+            while (steel.Count > 0 && carbon.Count > 0)
             {
                 ForgSwords(steel, carbon,forgedSwords);
+            }
+
+            PrintResult(forgedSwords,steel,carbon);
+
+        }
+        public static void PrintResult(Dictionary<string, List<int>> forgedSwords, Queue<int> steel, Stack<int> carbon, int totalNumberOfSwords =0)
+        {
+            foreach (var sword in forgedSwords)
+            {
+                if (forgedSwords[sword.Key][1] > 0)
+                {
+                    totalNumberOfSwords += forgedSwords[sword.Key][1];
+                }
+
+            }
+            if (totalNumberOfSwords > 0)
+            {
+                Console.WriteLine($"You have forged {totalNumberOfSwords} swords.");
+            }
+            else
+            {
+                Console.WriteLine("You did not have enough resources to forge a sword.");
+            }
+
+            if (steel.Count == 0)
+            {
+                Console.WriteLine("Steel left: none");
+            }
+            else
+            {
+                var steelLeft = steel.ToList();
+                Console.WriteLine($"Steel left: {string.Join(", ", steelLeft)}");
+            }
+
+            if (carbon.Count == 0)
+            {
+                Console.WriteLine("Carbon left: none");
+            }
+            else
+            {
+                var carbonLeft = carbon.ToList();
+                Console.WriteLine($"Carbon left: {string.Join(", ", carbonLeft)}");
+            }
+
+            foreach (var item in forgedSwords.OrderBy(x => x.Key))
+            {
+                if (forgedSwords[item.Key][1] > 0)
+                {
+                    Console.WriteLine($"{item.Key}: {item.Value[1]}");
+                }
+                
             }
         }
 
