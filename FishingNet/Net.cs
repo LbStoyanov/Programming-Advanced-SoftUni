@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace FishingNet
 {
@@ -9,13 +10,17 @@ namespace FishingNet
         {
             Material = material;
             Capacity = capacity;
-            
+            Fish = new List<Fish>();
         }
-        public List<Fish> Fish { get; set; } = new List<Fish>();
-        
+        public List<Fish> Fish { get; set; }
+
+        public int Count => Fish.Count; 
+
 
         public string Material { get; set; }
         public int Capacity { get; set; }
+
+        
 
         public string AddFish(Fish fish)
         {
@@ -39,7 +44,8 @@ namespace FishingNet
         {
             if (Fish.Any(x => x.Weight == weight))
             {
-                Fish.RemoveAll(x => x.Weight == weight);
+                var fishToRemove = Fish.FirstOrDefault(x => x.Weight == weight);
+                Fish.Remove(fishToRemove);
                 return true;
             }
 
@@ -64,9 +70,20 @@ namespace FishingNet
 
             return Fish.Find(x => x.Weight == maxLenght);
         }
-        public void Report()
+        public string Report()
         {
+            StringBuilder sb = new StringBuilder();
 
+            sb.AppendLine($"Into the {this.Material}: ");
+
+            var orderedCollectionOfFishes = Fish.OrderByDescending(x => x.Lenght).ToList();
+
+            foreach (var item in orderedCollectionOfFishes)
+            {
+                sb.AppendLine($"There is a {item.FishType}, {item.Lenght} cm. long, and {item.Weight} gr. in weight.");
+            }
+
+            return sb.ToString();
         }
     }
 }

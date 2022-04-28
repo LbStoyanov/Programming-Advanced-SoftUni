@@ -19,7 +19,7 @@
 
         public override string ToString()
         {
-            return $"There is a {this.fishType}, {this.length} cm. long, and {this.weight} gr. in weight.";
+            return $"There is a {this.FishType}, {this.Lenght} cm. long, and {this.Weight} gr. in weight.";
         }
     }
 }
