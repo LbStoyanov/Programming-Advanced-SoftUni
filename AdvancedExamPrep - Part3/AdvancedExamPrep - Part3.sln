@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32414.318
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01. Blacksmith", "01. Blacksmith\01. Blacksmith.csproj", "{1FDCD7DB-F587-41A2-9666-94DB9C527CA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02. Armory", "02. Armory\02. Armory.csproj", "{D5427D42-A3D3-4754-8D3E-AA4E71D8D247}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1FDCD7DB-F587-41A2-9666-94DB9C527CA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FDCD7DB-F587-41A2-9666-94DB9C527CA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FDCD7DB-F587-41A2-9666-94DB9C527CA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FDCD7DB-F587-41A2-9666-94DB9C527CA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5427D42-A3D3-4754-8D3E-AA4E71D8D247}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5427D42-A3D3-4754-8D3E-AA4E71D8D247}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5427D42-A3D3-4754-8D3E-AA4E71D8D247}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5427D42-A3D3-4754-8D3E-AA4E71D8D247}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A52274F0-AAB4-40BF-9393-3D2CF68CBA21}
+	EndGlobalSection
+EndGlobal
