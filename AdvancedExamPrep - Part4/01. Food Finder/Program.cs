@@ -29,14 +29,17 @@ namespace _01._Food_Finder
 
             while (consonants.Count > 0)
             {
-                if (counter == wordsToBeCreated.Count)
+                if (counter == 4)
                 {
+                    consonants.Pop();
                     counter = 0;
                 }
+
                 var currentWord = wordsToBeCreated[counter];
                 AddWordInFinalResult(vowels, consonants, currentWord, finalListOfWords);
-                consonants.Pop();
+                
                 counter++;
+
             }
 
 
@@ -71,7 +74,7 @@ namespace _01._Food_Finder
                         
                 }
 
-                if (sb.ToString() == currentWord)
+                if (sb.ToString() == currentWord && !finalListOfWords.Contains(currentWord))
                 {
                     finalListOfWords.Add(sb.ToString());
                     break;
