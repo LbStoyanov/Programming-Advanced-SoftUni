@@ -49,29 +49,76 @@ namespace _02._Pawn_Wars
             while (true)
             {
                 MoveWhitePawn(chessBoard, whitePawn);
-                MoveBlackPawn(chessBoard, whitePawn);
 
-                if (blackPawn.RowPosition == 0 && blackPawn.ColPosition == 0)
+                if (chessBoard[blackPawn.RowPosition,blackPawn.ColPosition] == 'w')
                 {
-                    Console.WriteLine("Game over! {white/black} capture on {coordinates}.");
+                    int coordinates = chessBoard[whitePawn.RowPosition,whitePawn.ColPosition];
+                    Console.WriteLine($"Game over! white capture on {coordinates}.");
+                    break;
                 }
 
-                if (whitePawn.RowPosition == 0 && whitePawn.ColPosition == 0)
+                if (whitePawn.RowPosition == 0)
                 {
-                    Console.WriteLine("Game over! {white/black} capture on {coordinates}.");
+                    int coordinates = chessBoard[whitePawn.RowPosition, whitePawn.ColPosition];
+                    Console.WriteLine($"Game over! white pawn is promoted to a queen at {coordinates}.");
+                    break;
+                }
+
+                MoveBlackPawn(chessBoard, blackPawn);
+
+                if (chessBoard[whitePawn.RowPosition, whitePawn.ColPosition] == 'b')
+                {
+                    int coordinates = chessBoard[whitePawn.RowPosition, whitePawn.ColPosition];
+                    Console.WriteLine($"Game over! black capture on {coordinates}.");
+                    break;
+                }
+
+                if (blackPawn.RowPosition == 7)
+                {
+                    int coordinates = chessBoard[whitePawn.RowPosition, whitePawn.ColPosition];
+                    Console.WriteLine($"Game over! white pawn is promoted to a queen at {coordinates}.");
+                    break;
                 }
 
             }
 
-
-            Console.WriteLine(new String('*', 30));
             PrintResult(chessBoard);
-
         }
 
-        private static void MoveBlackPawn(char[,] chessBoard, Pawn whitePawn)
+        private static void MoveBlackPawn(char[,] chessBoard, Pawn blackPawn)
         {
-            throw new NotImplementedException();
+            int row = blackPawn.RowPosition;
+            int col = blackPawn.ColPosition;
+
+            if (isInTheChessBoard(chessBoard, row + 1, col - 1))
+            {
+                if (chessBoard[row + 1, col - 1] == 'w')
+                {
+                    chessBoard[row + 1, col - 1] = 'b';
+                    chessBoard[row, col] = '-';
+                    return;
+                }
+            }
+
+            if (isInTheChessBoard(chessBoard, row + 1, col + 1))
+            {
+                if (chessBoard[row + 1, col + 1] == 'w')
+                {
+                    chessBoard[row + 1, col + 1] = 'b';
+                    chessBoard[row, col] = '-';
+                    return;
+                }
+            }
+
+            if (isInTheChessBoard(chessBoard, row + 1, col))
+            {
+                if (chessBoard[row + 1, col] != 'w')
+                {
+                    chessBoard[row + 1, col] = 'b';
+                    chessBoard[row, col] = '-';
+                    return;
+                }
+            }
         }
 
         private static void MoveWhitePawn(char[,] chessBoard, Pawn whitePawn)
@@ -108,7 +155,6 @@ namespace _02._Pawn_Wars
                     return;
                 }
             }
-
         }
 
         public static void PrintResult(char[,] chessBoard)
