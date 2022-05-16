@@ -64,7 +64,7 @@ namespace _02._Pawn_Wars
                     break;
                 }
 
-                MoveBlackPawn(chessBoard, blackPawn);
+                chessBoard = MoveBlackPawn(chessBoard, blackPawn);
 
                 if (chessBoard[whitePawn.RowPosition, whitePawn.ColPosition] == 'b')
                 {
@@ -85,8 +85,9 @@ namespace _02._Pawn_Wars
             PrintResult(chessBoard);
         }
 
-        private static void MoveBlackPawn(char[,] chessBoard, Pawn blackPawn)
+        public static char[,] MoveBlackPawn(char[,] chessBoard, Pawn blackPawn)
         {
+            char[,] result = chessBoard;
             int row = blackPawn.RowPosition;
             int col = blackPawn.ColPosition;
 
@@ -96,7 +97,6 @@ namespace _02._Pawn_Wars
                 {
                     chessBoard[row + 1, col - 1] = 'b';
                     chessBoard[row, col] = '-';
-                    return;
                 }
             }
 
@@ -106,7 +106,6 @@ namespace _02._Pawn_Wars
                 {
                     chessBoard[row + 1, col + 1] = 'b';
                     chessBoard[row, col] = '-';
-                    return;
                 }
             }
 
@@ -116,12 +115,14 @@ namespace _02._Pawn_Wars
                 {
                     chessBoard[row + 1, col] = 'b';
                     chessBoard[row, col] = '-';
-                    return;
+                    
                 }
             }
+
+            return result;
         }
 
-        private static void MoveWhitePawn(char[,] chessBoard, Pawn whitePawn)
+        private static char[,] MoveWhitePawn(char[,] chessBoard, Pawn whitePawn)
         {
             int row = whitePawn.RowPosition;
             int col = whitePawn.ColPosition;
@@ -132,7 +133,6 @@ namespace _02._Pawn_Wars
                 {
                     chessBoard[row - 1, col - 1] = 'w';
                     chessBoard[row, col] = '-';
-                    return;
                 }
             }
 
@@ -142,7 +142,6 @@ namespace _02._Pawn_Wars
                 {
                     chessBoard[row - 1, col + 1] = 'w';
                     chessBoard[row, col] = '-';
-                    return;
                 }
             }
 
@@ -152,9 +151,10 @@ namespace _02._Pawn_Wars
                 {
                     chessBoard[row - 1, col] = 'w';
                     chessBoard[row, col] = '-';
-                    return;
                 }
             }
+
+            return chessBoard;
         }
 
         public static void PrintResult(char[,] chessBoard)
