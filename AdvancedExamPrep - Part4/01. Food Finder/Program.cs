@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace _01._Food_Finder
 {
@@ -24,20 +25,96 @@ namespace _01._Food_Finder
             Queue<char> vowels = AddVolewsInQueue(volewsInput);
             Stack<char> consonants = AddConsonantInStack(consonantsInput);
 
-            while (consonants.Count != 0)
-            {
-                if (AddWordInFinalResult(vowels,consonants,wordsToBeCreated))
-                {
+            int counter = 0;
 
+            while (consonants.Count > 0)
+            {
+                if (counter == wordsToBeCreated.Count)
+                {
+                    counter = 0;
                 }
+                var currentWord = wordsToBeCreated[counter];
+                AddWordInFinalResult(vowels, consonants, currentWord, finalListOfWords);
+                consonants.Pop();
+                counter++;
             }
+
+
+            Console.WriteLine($"Words found: {finalListOfWords.Count}");
+            Console.WriteLine(String.Join(Environment.NewLine,finalListOfWords));
 
 
         }
 
-        private static bool AddWordInFinalResult(Queue<char> vowels, Stack<char> consonants, List<string> wordsToBeCreated)
+        private static void AddWordInFinalResult(Queue<char> vowels, Stack<char> consonants, string currentWord, List<string> finalListOfWords)
         {
-            throw new NotImplementedException();
+            string allChars = ReverseStackAndQueueIntoString(vowels, consonants);
+            // e,a,u,o,p,r,l,x,f
+
+            //currentWord - pear 
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < currentWord.Length; i++)
+            {
+                var currentWordChar = currentWord[i];
+                //P
+                
+                for (int j = 0; j < allChars.Length; j++)
+                {
+                    var currentChar = allChars[j];
+
+                    if (currentWordChar == currentChar)
+                    {
+                        sb.Append(currentChar);
+                        break;
+                    }
+                        
+                }
+
+                if (sb.ToString() == currentWord)
+                {
+                    finalListOfWords.Add(sb.ToString());
+                    break;
+                }
+
+            }
+
+        }
+        private static string ReverseStackAndQueueIntoString(Queue<char> vowels, Stack<char> consonants)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            var helperQueue = new Queue<char>();
+
+            while (vowels.Count > 0)
+            {
+                var currentChar = vowels.Peek();
+                sb.Append(currentChar);
+                helperQueue.Enqueue(vowels.Dequeue());
+            }
+
+            List<char> list = new List<char>();
+
+            while (consonants.Count > 0)
+            {
+                var currentChar = consonants.Peek();
+                sb.Append(currentChar);
+                list.Add(consonants.Pop());
+            }
+
+            list.Reverse();
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                consonants.Push(list[i]);
+            }
+
+            while (helperQueue.Count > 0)
+            {
+                vowels.Enqueue(helperQueue.Dequeue());
+            }
+
+            return sb.ToString();
         }
 
         public static Stack<char> AddConsonantInStack(char[] consonantsInput)
