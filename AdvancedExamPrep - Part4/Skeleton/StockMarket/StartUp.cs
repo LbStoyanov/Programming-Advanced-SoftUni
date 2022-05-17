@@ -1,4 +1,6 @@
-﻿namespace StockMarket
+﻿using System;
+
+namespace StockMarket
 {
     public class StartUp
     {
