@@ -64,7 +64,7 @@ namespace _02._Pawn_Wars
                     break;
                 }
 
-                chessBoard = MoveBlackPawn(chessBoard, blackPawn);
+                MoveBlackPawn(chessBoard, blackPawn);
 
                 if (chessBoard[whitePawn.RowPosition, whitePawn.ColPosition] == 'b')
                 {
@@ -79,15 +79,27 @@ namespace _02._Pawn_Wars
                     Console.WriteLine($"Game over! white pawn is promoted to a queen at {coordinates}.");
                     break;
                 }
+            }
+        }
+        public static void ChessCoordinatesCalculating(char[,] chessBoard,int coordinates)
+        {
+            char[] letters = new char[] { 'a' , 'b', 'c', 'd', 'e', 'f', 'g', 'h', };
+            char[] numbers = new char[] { '8' , '7', '6', '5', '4', '3', '2', '1', };
 
+            for (int row = 0; row < chessBoard.GetLength(0); row++)
+            {
+                
+                for (int col = 0; col < coordinates; col++)
+                {
+                    chessBoard[row, col] = rowInput[col];
+                }
             }
 
-            PrintResult(chessBoard);
         }
 
-        public static char[,] MoveBlackPawn(char[,] chessBoard, Pawn blackPawn)
+        public static void MoveBlackPawn(char[,] chessBoard, Pawn blackPawn)
         {
-            char[,] result = chessBoard;
+            
             int row = blackPawn.RowPosition;
             int col = blackPawn.ColPosition;
 
@@ -97,6 +109,8 @@ namespace _02._Pawn_Wars
                 {
                     chessBoard[row + 1, col - 1] = 'b';
                     chessBoard[row, col] = '-';
+                    blackPawn.RowPosition = row + 1;
+                    blackPawn.ColPosition = col - 1;
                 }
             }
 
@@ -106,6 +120,8 @@ namespace _02._Pawn_Wars
                 {
                     chessBoard[row + 1, col + 1] = 'b';
                     chessBoard[row, col] = '-';
+                    blackPawn.RowPosition = row + 1;
+                    blackPawn.ColPosition = col + 1;
                 }
             }
 
@@ -115,14 +131,12 @@ namespace _02._Pawn_Wars
                 {
                     chessBoard[row + 1, col] = 'b';
                     chessBoard[row, col] = '-';
-                    
+                    blackPawn.RowPosition = row + 1;
                 }
             }
-
-            return result;
         }
 
-        private static char[,] MoveWhitePawn(char[,] chessBoard, Pawn whitePawn)
+        private static void MoveWhitePawn(char[,] chessBoard, Pawn whitePawn)
         {
             int row = whitePawn.RowPosition;
             int col = whitePawn.ColPosition;
@@ -133,6 +147,8 @@ namespace _02._Pawn_Wars
                 {
                     chessBoard[row - 1, col - 1] = 'w';
                     chessBoard[row, col] = '-';
+                    whitePawn.RowPosition = row - 1;
+                    whitePawn.ColPosition = col - 1;
                 }
             }
 
@@ -142,6 +158,8 @@ namespace _02._Pawn_Wars
                 {
                     chessBoard[row - 1, col + 1] = 'w';
                     chessBoard[row, col] = '-';
+                    whitePawn.RowPosition = row - 1;
+                    whitePawn.ColPosition = col + 1;
                 }
             }
 
@@ -151,10 +169,10 @@ namespace _02._Pawn_Wars
                 {
                     chessBoard[row - 1, col] = 'w';
                     chessBoard[row, col] = '-';
+                    whitePawn.RowPosition = row - 1;
+                    whitePawn.ColPosition = col;
                 }
             }
-
-            return chessBoard;
         }
 
         public static void PrintResult(char[,] chessBoard)
