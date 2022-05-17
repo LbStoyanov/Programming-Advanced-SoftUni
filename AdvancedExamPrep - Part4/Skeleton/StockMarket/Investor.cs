@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace StockMarket
 {
@@ -12,6 +13,7 @@ namespace StockMarket
             EmailAddress = emailAddress;
             MoneyToInvest = moneyToInvest;
             BrokerName = brokerName;
+            Portfolio = new HashSet<Stock>();
         }
 
         public string FullName { get; set; }
@@ -23,20 +25,21 @@ namespace StockMarket
             => this.Portfolio.Count;
         public void BuyStock(Stock stock)
         {
-            if (stock.MarketCapitalization > shareCeiling && this.MoneyToInvest >= shareCeiling)
+            if (stock.MarketCapitalization > shareCeiling && this.MoneyToInvest >= stock.PricePerShare)
             {
                 this.Portfolio.Add(stock);
-                this.MoneyToInvest -= stock.MarketCapitalization;
+                this.MoneyToInvest -= stock.PricePerShare;
             }
         }
         public string SellStock(string companyName, decimal sellPrice)
         {
-            Stock stockToBeSelled = Portfolio.FirstOrDefault(x => x.CompanyName == companyName);
-
-            if (!this.Portfolio.Contains(stockToBeSelled))
+            
+            if (!this.Portfolio.Any(x => x.CompanyName == companyName))
             {
                 return $"{companyName} does not exist.";
             }
+
+            Stock stockToBeSelled = Portfolio.FirstOrDefault(x => x.CompanyName == companyName);
 
             if (sellPrice < stockToBeSelled.PricePerShare)
             {
@@ -66,18 +69,26 @@ namespace StockMarket
                 return null;
             }
 
-            var orderedByMaxMarketCapitalizationPortFolio = this.Portfolio.OrderBy(x => x.MarketCapitalization).Max();
-
-            Stock stock = orderedByMaxMarketCapitalizationPortFolio;
+            Stock stock = this.Portfolio.OrderByDescending(x => x.MarketCapitalization).First();
 
             return stock;
             
         }
         public string InvestorInformation()
         {
+            StringBuilder sb = new StringBuilder();
 
+            sb.AppendLine($"The investor {this.FullName} with a broker {this.BrokerName} has stocks:");
 
-            return $"The investor {this.FullName} with a broker {this.BrokerName} has stocks:\n{string.Join} ";
+            foreach (var stock in Portfolio)
+            {
+                sb.AppendLine($"Company: {stock.CompanyName}");
+                sb.AppendLine($"Director: {stock.Director}");
+                sb.AppendLine($"Price per share: ${stock.PricePerShare}");
+                sb.AppendLine($"Market capitalization: ${stock.MarketCapitalization}");
+            }
+
+            return sb.ToString();
         }
     }
 }
