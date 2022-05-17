@@ -19,6 +19,9 @@ namespace _02._Pawn_Wars
     {
         static void Main(string[] args)
         {
+            char[] letters = new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', };
+            char[] numbers = new char[] { '8', '7', '6', '5', '4', '3', '2', '1', };
+
             Pawn whitePawn = new Pawn(0, 0);
             Pawn blackPawn = new Pawn(0, 0);
 
@@ -52,15 +55,20 @@ namespace _02._Pawn_Wars
 
                 if (chessBoard[blackPawn.RowPosition,blackPawn.ColPosition] == 'w')
                 {
-                    int coordinates = chessBoard[whitePawn.RowPosition,whitePawn.ColPosition];
-                    Console.WriteLine($"Game over! white capture on {coordinates}.");
+                    char row = numbers[whitePawn.RowPosition];
+                    char col = letters[whitePawn.ColPosition];
+
+                    Console.WriteLine($"Game over! White capture on {col}{row}.");
                     break;
                 }
 
                 if (whitePawn.RowPosition == 0)
                 {
-                    int coordinates = chessBoard[whitePawn.RowPosition, whitePawn.ColPosition];
-                    Console.WriteLine($"Game over! white pawn is promoted to a queen at {coordinates}.");
+
+                    char row = numbers[whitePawn.RowPosition];
+                    char col = letters[whitePawn.ColPosition];
+
+                    Console.WriteLine($"Game over! White pawn is promoted to a queen at {col}{row}.");
                     break;
                 }
 
@@ -68,34 +76,24 @@ namespace _02._Pawn_Wars
 
                 if (chessBoard[whitePawn.RowPosition, whitePawn.ColPosition] == 'b')
                 {
-                    int coordinates = chessBoard[whitePawn.RowPosition, whitePawn.ColPosition];
-                    Console.WriteLine($"Game over! black capture on {coordinates}.");
+                    char row = numbers[blackPawn.RowPosition];
+                    char col = letters[blackPawn.ColPosition];
+
+                    Console.WriteLine($"Game over! Black capture on {col}{row}.");
                     break;
                 }
 
                 if (blackPawn.RowPosition == 7)
                 {
-                    int coordinates = chessBoard[whitePawn.RowPosition, whitePawn.ColPosition];
-                    Console.WriteLine($"Game over! white pawn is promoted to a queen at {coordinates}.");
+                    char row = numbers[blackPawn.RowPosition];
+                    char col = letters[blackPawn.ColPosition];
+
+                    Console.WriteLine($"Game over! Black pawn is promoted to a queen at {col}{row}.");
                     break;
                 }
             }
         }
-        public static void ChessCoordinatesCalculating(char[,] chessBoard,int coordinates)
-        {
-            char[] letters = new char[] { 'a' , 'b', 'c', 'd', 'e', 'f', 'g', 'h', };
-            char[] numbers = new char[] { '8' , '7', '6', '5', '4', '3', '2', '1', };
-
-            for (int row = 0; row < chessBoard.GetLength(0); row++)
-            {
-                
-                for (int col = 0; col < coordinates; col++)
-                {
-                    chessBoard[row, col] = rowInput[col];
-                }
-            }
-
-        }
+        
 
         public static void MoveBlackPawn(char[,] chessBoard, Pawn blackPawn)
         {
@@ -111,6 +109,7 @@ namespace _02._Pawn_Wars
                     chessBoard[row, col] = '-';
                     blackPawn.RowPosition = row + 1;
                     blackPawn.ColPosition = col - 1;
+                    return;
                 }
             }
 
@@ -122,6 +121,7 @@ namespace _02._Pawn_Wars
                     chessBoard[row, col] = '-';
                     blackPawn.RowPosition = row + 1;
                     blackPawn.ColPosition = col + 1;
+                    return;
                 }
             }
 
@@ -149,6 +149,7 @@ namespace _02._Pawn_Wars
                     chessBoard[row, col] = '-';
                     whitePawn.RowPosition = row - 1;
                     whitePawn.ColPosition = col - 1;
+                    return;
                 }
             }
 
@@ -160,6 +161,7 @@ namespace _02._Pawn_Wars
                     chessBoard[row, col] = '-';
                     whitePawn.RowPosition = row - 1;
                     whitePawn.ColPosition = col + 1;
+                    return;
                 }
             }
 
@@ -187,11 +189,6 @@ namespace _02._Pawn_Wars
             }
 
         }
-        private static bool IsThereAnotherPawn(char[,] chessBoard, int row, int col)
-        {
-            return chessBoard[row, col] != '-';
-        }
-
         private static bool isInTheChessBoard(char[,] chessBoard, int row, int col)
         {
 
