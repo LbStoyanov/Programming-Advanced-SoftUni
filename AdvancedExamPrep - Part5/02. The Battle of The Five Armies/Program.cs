@@ -57,44 +57,51 @@
                 int currentCol = int.Parse(commands[2]);
 
                 middleWorldMap[currentRow, currentCol] = 'O';
+                army.Armor--;
 
-                if (direction == "up")
-                {
-                    
-                }
-                if (direction == "down")
-                {
+               
 
-                }
-                if (direction == "left")
-                {
-
-                }
-                if (direction == "right")
-                {
-
-                }
+                MoveArmy(middleWorldMap, army, direction);
 
             }
             
         }
 
-        public void MoveArmyUp(char[,] middleWorldMap,int armyRow, int armyCol)
+        public static void MoveArmy(char[,] middleWorldMap, Army army,string direction)
         {
-            if (isInRange(middleWorldMap,armyRow - 1,armyCol))
+            if (direction == "up")
             {
-                if (middleWorldMap[armyRow - 1,armyCol] == 'O')
-                {
+                army.Row--;
 
-                }
-                else if (middleWorldMap[armyRow - 1, armyCol] == 'M')
-                {
+                ApplyMove(middleWorldMap,army);
+            }
+            if (direction == "down")
+            {
 
-                }
-                else
-                {
+            }
+            if (direction == "left")
+            {
 
-                }
+            }
+            if (direction == "right")
+            {
+
+            }
+        }
+
+        private static void ApplyMove(char[,] middleWorldMap, Army army)
+        {
+            if (middleWorldMap[army.Row, army.Col] == 'O')
+            {
+
+            }
+            else if (middleWorldMap[army.Row, army.Col] == 'M')
+            {
+
+            }
+            else
+            {
+
             }
         }
 
