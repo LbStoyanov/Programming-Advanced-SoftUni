@@ -29,7 +29,7 @@
 
             army.Armor = armyArmorValue;
 
-            char[,] middleWorldMap = new char[numberOfRows,numberOfRows];
+            char[,] middleWorldMap = new char[numberOfRows, numberOfRows];
 
             for (int row = 0; row < middleWorldMap.GetLength(0); row++)
             {
@@ -59,54 +59,76 @@
                 middleWorldMap[currentRow, currentCol] = 'O';
                 army.Armor--;
 
-               
+                if (direction == "up")
+                {
+                    MoveArmyUp(middleWorldMap, army, direction);
+                }
+                if (direction == "down")
+                {
 
-                MoveArmy(middleWorldMap, army, direction);
+                }
+                if (direction == "left")
+                {
+
+                }
+                if (direction == "right")
+                {
+
+                }
 
             }
-            
+
         }
 
-        public static void MoveArmy(char[,] middleWorldMap, Army army,string direction)
+        public static void MoveArmyUp(char[,] middleWorldMap, Army army, string direction)
         {
-            if (direction == "up")
+            if (isInRange(middleWorldMap, army))
             {
-                army.Row--;
+                if (middleWorldMap[army.Row, army.Col] == 'O')
+                {
+                    army.Armor -= 2;
 
-                ApplyMove(middleWorldMap,army);
+                    if (army.Armor <= 0)
+                    {
+                        middleWorldMap[army.Row, army.Col] = 'X';
+                    }
+                    else
+                    {
+                        middleWorldMap[army.Row, army.Col] = 'M';
+                    }
+
+                    middleWorldMap[army.Row + 1, army.Col] = '-';
+
+                }
+                else if (middleWorldMap[army.Row, army.Col] == 'M')
+                {
+                    middleWorldMap[army.Row, army.Col] = '-';
+                    middleWorldMap[army.Row + 1, army.Col] = '-';
+                    return;
+                }
+                else
+                {
+                    middleWorldMap[army.Row, army.Col] = 'M';
+                    middleWorldMap[army.Row + 1, army.Col] = '-';
+                }
             }
-            if (direction == "down")
+            else
             {
-
-            }
-            if (direction == "left")
-            {
-
-            }
-            if (direction == "right")
-            {
-
+                army.Row++;
             }
         }
 
         private static void ApplyMove(char[,] middleWorldMap, Army army)
         {
-            if (middleWorldMap[army.Row, army.Col] == 'O')
-            {
+            
 
-            }
-            else if (middleWorldMap[army.Row, army.Col] == 'M')
-            {
-
-            }
-            else
-            {
-
-            }
         }
 
-        private static bool isInRange(char[,] middleWorldMap, int row, int col)
+        private static bool isInRange(char[,] middleWorldMap, Army army)
         {
+            int row = army.Row;
+            int col = army.Col;
+
             return row >= 0 && row < middleWorldMap.GetLength(0) && col >= 0 && col < middleWorldMap.GetLength(1);
         }
     }
