@@ -4,15 +4,30 @@
     using System.Linq;
     using System.Collections.Generic;
 
+    class Army
+    {
+        public Army()
+        {
+            Row = 0;
+            Col = 0;
+            Armor = 0;
+        }
+
+        public int Row { get; set; }
+        public int Col { get; set; }
+        public int Armor { get; set; }
+    }
+
     class Program
     {
         static void Main(string[] args)
         {
+            Army army = new Army();
+
             int armyArmorValue = int.Parse(Console.ReadLine());
             int numberOfRows = int.Parse(Console.ReadLine());
 
-            int armyRow = 0;
-            int armyCol = 0;
+            army.Armor = armyArmorValue;
 
             char[,] middleWorldMap = new char[numberOfRows,numberOfRows];
 
@@ -26,8 +41,8 @@
 
                     if (middleWorldMap[row, col] == 'A')
                     {
-                        armyRow = row;
-                        armyCol = col;
+                        army.Row = row;
+                        army.Col = col;
                     }
                 }
             }
@@ -45,7 +60,7 @@
 
                 if (direction == "up")
                 {
-
+                    
                 }
                 if (direction == "down")
                 {
@@ -64,9 +79,23 @@
             
         }
 
-        public void MoveArmy(char[,] middleWorldMap,int row,int col)
+        public void MoveArmyUp(char[,] middleWorldMap,int armyRow, int armyCol)
         {
-            
+            if (isInRange(middleWorldMap,armyRow - 1,armyCol))
+            {
+                if (middleWorldMap[armyRow - 1,armyCol] == 'O')
+                {
+
+                }
+                else if (middleWorldMap[armyRow - 1, armyCol] == 'M')
+                {
+
+                }
+                else
+                {
+
+                }
+            }
         }
 
         private static bool isInRange(char[,] middleWorldMap, int row, int col)
