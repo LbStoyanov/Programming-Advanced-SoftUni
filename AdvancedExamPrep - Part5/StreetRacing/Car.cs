@@ -11,7 +11,7 @@ namespace StreetRacing
             Make = make;
             Model = model;
             LicensePlate = licensePlate;
-            HoresePower = horesePower;
+            HorsePower = horesePower;
             Weight = weight;
         }
 
@@ -23,8 +23,16 @@ namespace StreetRacing
 
         public override string ToString()
         {
-            return $"Make: {this.Make}\nModel: {this.Model}\nLicense Plate: {this.LicensePlate}\nHorse Power: {this
-                .HorsePower}\nWeight: {this.Weight}";
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine($"Make: {this.Make}");
+            sb.AppendLine($"Model: {this.Model}");
+            sb.AppendLine($"License Plate: {this.LicensePlate}");
+            sb.AppendLine($"Horse Power: {this.HorsePower}");
+            sb.AppendLine($"Weight: {this.Weight}");
+
+
+            return sb.ToString();
         }
     }
 }
