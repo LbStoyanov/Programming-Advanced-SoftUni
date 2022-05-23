@@ -18,9 +18,13 @@ namespace StreetRacing
         public string Make { get; set; }
         public string Model { get; set; }
         public string LicensePlate { get; set; }
-        public int HoresePower { get; set; }
+        public int HorsePower { get; set; }
         public double Weight { get; set; }
 
-
+        public override string ToString()
+        {
+            return $"Make: {this.Make}\nModel: {this.Model}\nLicense Plate: {this.LicensePlate}\nHorse Power: {this
+                .HorsePower}\nWeight: {this.Weight}";
+        }
     }
 }
