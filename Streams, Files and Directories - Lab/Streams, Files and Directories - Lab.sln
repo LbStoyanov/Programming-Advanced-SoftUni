@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01. Odd Lines", "01. Odd Li
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02. Line Numbers", "02. Line Numbers\02. Line Numbers.csproj", "{E0C6DE43-5181-45FF-BB00-D9F2BE2A3C27}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03. Word Count", "03. Word Count\03. Word Count.csproj", "{32C4DE15-22B8-4D20-A87B-B563D887FE47}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{E0C6DE43-5181-45FF-BB00-D9F2BE2A3C27}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0C6DE43-5181-45FF-BB00-D9F2BE2A3C27}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0C6DE43-5181-45FF-BB00-D9F2BE2A3C27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32C4DE15-22B8-4D20-A87B-B563D887FE47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32C4DE15-22B8-4D20-A87B-B563D887FE47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32C4DE15-22B8-4D20-A87B-B563D887FE47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32C4DE15-22B8-4D20-A87B-B563D887FE47}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
