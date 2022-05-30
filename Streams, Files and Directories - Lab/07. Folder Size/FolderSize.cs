@@ -20,6 +20,7 @@ namespace FolderSize
             double sum = 0;
 
             DirectoryInfo dir = new DirectoryInfo(folderPath);
+
             FileInfo[] infos = dir.GetFiles("*", SearchOption.AllDirectories);
 
             foreach (FileInfo fileInfo in infos)
