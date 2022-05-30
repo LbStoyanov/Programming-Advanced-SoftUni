@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04. Merge Text Files", "04.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05. Extract Special Bytes", "05. Extract Special Bytes\05. Extract Special Bytes.csproj", "{711CDD55-057C-4077-90D3-7F12D2D1FBA8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06. Split, Merge Binary Files", "06. Split, Merge Binary Files\06. Split, Merge Binary Files.csproj", "{29B250D9-687F-4608-ABF9-DE6FACB24725}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "07. Folder Size", "07. Folder Size\07. Folder Size.csproj", "{CAFB7B0D-188F-46FA-8BE5-5176A9B785A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{711CDD55-057C-4077-90D3-7F12D2D1FBA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{711CDD55-057C-4077-90D3-7F12D2D1FBA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{711CDD55-057C-4077-90D3-7F12D2D1FBA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29B250D9-687F-4608-ABF9-DE6FACB24725}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29B250D9-687F-4608-ABF9-DE6FACB24725}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29B250D9-687F-4608-ABF9-DE6FACB24725}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29B250D9-687F-4608-ABF9-DE6FACB24725}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAFB7B0D-188F-46FA-8BE5-5176A9B785A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAFB7B0D-188F-46FA-8BE5-5176A9B785A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAFB7B0D-188F-46FA-8BE5-5176A9B785A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAFB7B0D-188F-46FA-8BE5-5176A9B785A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
