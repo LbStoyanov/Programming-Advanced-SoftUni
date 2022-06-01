@@ -21,6 +21,12 @@ namespace ActionPrint
             List<string> names = namesInput.Split().ToList();
             printCollection(names);
 
+
+            //Func<accept,return>
+            
+
+            //Predicate<accept data type> return (true/false)
+
             
         }
     }
