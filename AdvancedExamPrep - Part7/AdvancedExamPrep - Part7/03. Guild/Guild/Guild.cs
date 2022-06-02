@@ -63,7 +63,7 @@ namespace Guild
             {
                 Player player = this.Roster.FirstOrDefault(p => p.Name == name);
 
-                if (player.Rank != "Trial")
+                if(player.Rank != "Trial")
                 {
                     player.Rank = "Trial";
                 }
@@ -73,6 +73,7 @@ namespace Guild
         public Player[] KickPlayersByClass(string _class)
         {
             Player[] playersToReturn = this.Roster.FindAll(x => x.Class == _class).ToArray();
+
             this.Roster.RemoveAll(x => x.Class == _class);
             this.Capacity += playersToReturn.Length;
             return playersToReturn;
