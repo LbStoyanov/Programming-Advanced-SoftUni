@@ -8,73 +8,65 @@ namespace PredicateParty
     {
         static void Main(string[] args)
         {
-            var personsList = Console.ReadLine().Split().ToList();
-            var personsGoingToTheParty = new List<string>();
+            List<string> people = Console.ReadLine().Split().ToList();
 
-            Func<string, string> doubleThePerson = name => name + ", " + name;
+            string commands = Console.ReadLine();
 
-            string commands;
-
-            while ((commands = Console.ReadLine()) != "Party!")
+            while (commands != "Party!")
             {
-                string[] splittedCommand = commands.Split();
-                string mainCommand = splittedCommand[0];
-                string lettersForSearch = splittedCommand[2];
+                Predicate<string> predicate = GetPredicate(commands);
 
-                if (mainCommand == "Remove")
+                if (commands.StartsWith("Double"))
                 {
-                    if (splittedCommand[1] == "StartsWith")
+                    for (int i = 0; i < people.Count; i++)
                     {
-                        personsList.RemoveAll(x => x.StartsWith(lettersForSearch));
-                    }
-                    else if (splittedCommand[1] == "EndsWith")
-                    {
-                        personsList.RemoveAll(x => x.EndsWith(lettersForSearch));
-                    }
-                }
-                if (mainCommand == "Double")
-                {
-                    if (splittedCommand[1] == "StartsWith")
-                    {
-                        string[] personsToBeDoubled = personsList.FindAll(x => x.StartsWith(lettersForSearch)).ToArray();
-
-                        for (int i = 0; i < personsToBeDoubled.Length; i++)
+                        string person = people[i];
+                        if (predicate(person))
                         {
-                            personsList.Add(doubleThePerson(personsToBeDoubled[i]));
-                        }
-                    }
-                    else if (splittedCommand[1] == "EndsWith")
-                    {
-                        string[] personsToBeDoubled = personsList.FindAll(x => x.EndsWith(lettersForSearch)).ToArray();
-
-                        for (int i = 0; i < personsToBeDoubled.Length; i++)
-                        {
-                            personsList.Add(doubleThePerson(personsToBeDoubled[i]));
-                        }
-                    }
-                    else
-                    {
-                        int lenghtToBeCompared = int.Parse(splittedCommand[2]);
-
-                        string[] personsToBeDoubled = personsList.FindAll(x => x.Length == lenghtToBeCompared).ToArray();
-
-                        for (int i = 0; i < personsToBeDoubled.Length; i++)
-                        {
-                            personsList.Add(doubleThePerson(personsToBeDoubled[i]));
+                            people.Insert(i + 1, person);
+                            i++;
                         }
                     }
                 }
+                else if (commands.StartsWith("Remove"))
+                {
+                    people.RemoveAll(predicate);
+                }
 
+                commands = Console.ReadLine();
             }
 
 
-            if (personsList.Count == 0)
+            if (people.Count == 0)
             {
                 Console.WriteLine("Nobody is going to the party!");
                 return;
             }
-            Console.Write(string.Join(", ",personsList));
+            Console.Write(string.Join(", ",people));
             Console.WriteLine(" are going to the party!");
+        }
+
+        private static Predicate<string> GetPredicate(string commands)
+        {
+            string command2 = commands.Split()[1];
+            string arg = commands.Split()[2];
+
+            Predicate<string> predicate = null;
+
+            if (command2 == "StartsWith")
+            {
+                predicate = name => name.StartsWith(arg);
+            }
+            else if (command2 == "EndsWith")
+            {
+                predicate = name => name.EndsWith(arg);
+            }
+            else if (command2 == "Length")
+            {
+                predicate = name => name.Length == int.Parse(arg);
+            }
+
+            return predicate;
         }
     }
 }
