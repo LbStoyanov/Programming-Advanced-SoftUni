@@ -51,7 +51,7 @@ namespace SuperMario
                 }
             }
 
-            
+            bool isMarioDied = false;
 
             while (true)
             {
@@ -64,58 +64,188 @@ namespace SuperMario
 
                 mario.LivesCount--;
 
-                if (mario.LivesCount <= 0)
-                {
-                    theMaze[mario.Row, mario.Col] = 'X';
-                    break;
-                }
-
                 if (direction == Up)
                 {
                     MoveUp(theMaze,mario);
                 }
                 if (direction == Down)
                 {
-
+                    MoveDown(theMaze, mario);
                 }
                 if (direction == Left)
                 {
-
+                    MoveLeft(theMaze, mario);
                 }
                 if (direction == Right)
                 {
-
+                    MoveRight(theMaze, mario);
                 }
 
+                if (theMaze[mario.Row,mario.Col] == 'X')
+                {
+                    isMarioDied = true;
+                    break;
+                }
 
-
-
-
-
-
+                if (theMaze[mario.Row, mario.Col] == '-')
+                {
+                    break;
+                }
+               
+                if (mario.LivesCount <= 0)
+                {
+                    theMaze[mario.Row, mario.Col] = 'X';
+                    isMarioDied = true;
+                    break;
+                }
             }
+
+            if (isMarioDied)
+            {
+                Console.WriteLine($"Mario died at {mario.Row};{mario.Col}.");
+            }
+            else
+            {
+                Console.WriteLine($"Mario has successfully saved the princess! Lives left: {mario.LivesCount}");
+            }
+
+            PrintResult(theMaze);
+
+        }
+
+        private static void MoveRight(char[,] theMaze, Mario mario)
+        {
+            mario.Col++;
+
+            if (isInRange(theMaze, mario))
+            {
+                if (theMaze[mario.Row, mario.Col] == 'B')
+                {
+                    mario.LivesCount -= 2;
+                    theMaze[mario.Row, mario.Col - 1] = '-';
+                    theMaze[mario.Row, mario.Col] = 'M';
+                    if (mario.LivesCount <= 0)
+                    {
+                        theMaze[mario.Row, mario.Col] = 'X';
+                    }
+                }
+                else if (theMaze[mario.Row, mario.Col] == 'P')
+                {
+                    theMaze[mario.Row, mario.Col] = '-';
+                    theMaze[mario.Row, mario.Col - 1] = '-';
+                }
+                else
+                {
+                    theMaze[mario.Row, mario.Col] = 'M';
+                    theMaze[mario.Row, mario.Col - 1] = '-';
+                }
+
+                return;
+            }
+
+            mario.Col--;
+
+        }
+
+        private static void MoveLeft(char[,] theMaze, Mario mario)
+        {
+            mario.Col--;
+
+            if (isInRange(theMaze, mario))
+            {
+                if (theMaze[mario.Row, mario.Col] == 'B')
+                {
+                    mario.LivesCount -= 2;
+                    theMaze[mario.Row , mario.Col + 1] = '-';
+                    theMaze[mario.Row, mario.Col] = 'M';
+                    if (mario.LivesCount <= 0)
+                    {
+                        theMaze[mario.Row, mario.Col] = 'X';
+                    }
+                }
+                else if (theMaze[mario.Row, mario.Col] == 'P')
+                {
+                    theMaze[mario.Row, mario.Col] = '-';
+                    theMaze[mario.Row, mario.Col + 1] = '-';
+                }
+                else
+                {
+                    theMaze[mario.Row, mario.Col] = 'M';
+                    theMaze[mario.Row, mario.Col + 1] = '-';
+                }
+
+                return;
+            }
+
+            mario.Col++; ;
+
+        }
+
+        private static void MoveDown(char[,] theMaze, Mario mario)
+        {
+            mario.Row++;
+
+            if (isInRange(theMaze, mario))
+            {
+                if (theMaze[mario.Row, mario.Col] == 'B')
+                {
+                    mario.LivesCount -= 2;
+                    theMaze[mario.Row - 1, mario.Col] = '-';
+                    theMaze[mario.Row, mario.Col] = 'M';
+                    if (mario.LivesCount <= 0)
+                    {
+                        theMaze[mario.Row, mario.Col] = 'X';
+                    }
+                }
+                else if (theMaze[mario.Row, mario.Col] == 'P')
+                {
+                    theMaze[mario.Row, mario.Col] = '-';
+                    theMaze[mario.Row - 1, mario.Col] = '-';
+                }
+                else
+                {
+                    theMaze[mario.Row, mario.Col] = 'M';
+                    theMaze[mario.Row - 1, mario.Col] = '-';
+                }
+
+                return;
+            }
+
+            mario.Row--;
 
         }
 
         private static void MoveUp(char[,] theMaze, Mario mario)
         {
+            mario.Row--;
 
             if (isInRange(theMaze,mario))
             {
-                if (theMaze[mario.Row - 1,mario.Col] == 'B')
+                if (theMaze[mario.Row ,mario.Col] == 'B')
                 {
                     mario.LivesCount-=2;
-                    theMaze[mario.Row - 1, mario.Col] = '-';
+                    theMaze[mario.Row + 1, mario.Col] = '-';
+                    theMaze[mario.Row, mario.Col] = 'M';
+                    if (mario.LivesCount <=0)
+                    {
+                        theMaze[mario.Row, mario.Col] = 'X';
+                    }
                 }
-                if (theMaze[mario.Row - 1, mario.Col] == 'P')
+                else if (theMaze[mario.Row , mario.Col] == 'P')
                 {
-
+                    theMaze[mario.Row, mario.Col] = '-';
+                    theMaze[mario.Row + 1, mario.Col] = '-';
                 }
-                if (theMaze[mario.Row - 1, mario.Col] == 'B')
+                else
                 {
-
+                    theMaze[mario.Row, mario.Col] = 'M';
+                    theMaze[mario.Row + 1, mario.Col] = '-';
                 }
+
+                return;
             }
+
+            mario.Row++;
           
         }
 
