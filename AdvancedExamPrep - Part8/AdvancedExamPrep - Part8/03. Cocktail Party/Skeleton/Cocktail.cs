@@ -22,10 +22,9 @@ namespace CocktailParty
 
         public void Add(Ingredient ingredient)
         {
-            if (!Ingredients.Any(x => x.Name == ingredient.Name) && Capacity > 0 && ingredient.Alcohol <= MaxAlcoholLevel)
+            if (!Ingredients.Any(x => x.Name == ingredient.Name)&& Capacity > 0 && ingredient.Alcohol <= MaxAlcoholLevel)
             {
                 Ingredients.Add(ingredient);
-                Capacity--;
             }
         }
 
@@ -35,22 +34,21 @@ namespace CocktailParty
             {
                 Ingredient ingredientForRemove = Ingredients.FirstOrDefault(x => x.Name == name);
                 Ingredients.Remove(ingredientForRemove);
-                Capacity++;
                 return true;
             }
 
             return false;
         }
-        public Ingredient FindIngredient(string name)
-        {
-            if (Ingredients.Any(x => x.Name == name))
+         public Ingredient FindIngredient(string name)
+         {
+            if (Ingredients.Any(x =>x.Name == name))
             {
                 Ingredient ingredient = Ingredients.FirstOrDefault(x => x.Name == name);
                 return ingredient;
             }
 
             return null;
-        }
+         }
 
         public Ingredient GetMostAlcoholicIngredient()
         {
@@ -59,7 +57,7 @@ namespace CocktailParty
         }
 
         public int CurrentAlcoholLevel
-            => Ingredients.OrderBy(x => x.Alcohol > 0).Count();
+            => this.Ingredients.Sum(x => x.Alcohol);
 
         public string Report()
         {
@@ -69,9 +67,7 @@ namespace CocktailParty
 
             foreach (var ingredient in Ingredients)
             {
-                sb.AppendLine($"Ingredient: {ingredient.Name}");
-                sb.AppendLine($"Quantity: {ingredient.Quantity}");
-                sb.AppendLine($"Alcohol: {ingredient.Alcohol}");
+              sb.AppendLine(ingredient.ToString());
             }
 
             return sb.ToString().TrimEnd();
