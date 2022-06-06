@@ -3,17 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DefiningClasses", "DefiningClasses.csproj", "{C53A356D-2904-49A5-A818-F8AB1B17E172}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01.Define classPerson and 02.Create Constr", "01.Define classPerson and 02.Create Constr.csproj", "{C53A356D-2904-49A5-A818-F8AB1B17E172}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DateModifier", "..\05. Date Modifier\DateModifier.csproj", "{F8B4DAC1-B251-48D3-A559-4BBDA15E56B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "05.DateModifier", "..\05. Date Modifier\05.DateModifier.csproj", "{F8B4DAC1-B251-48D3-A559-4BBDA15E56B1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeedRacing", "..\SpeedRacing\SpeedRacing.csproj", "{FF001CE2-3127-4CA2-A7FB-70064B5A801D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "06.SpeedRacing", "..\SpeedRacing\06.SpeedRacing.csproj", "{FF001CE2-3127-4CA2-A7FB-70064B5A801D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RawData", "..\RawData\RawData.csproj", "{348908A9-65B5-4E9F-BBB0-9CD6F97A508F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "07.RawData", "..\RawData\07.RawData.csproj", "{348908A9-65B5-4E9F-BBB0-9CD6F97A508F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarSalesman", "..\CarSalesman\CarSalesman.csproj", "{70A42421-DC13-4648-B44D-6E31226D411D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "08.CarSalesman", "..\CarSalesman\08.CarSalesman.csproj", "{70A42421-DC13-4648-B44D-6E31226D411D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonTrainer", "..\PokemonTrainer\PokemonTrainer.csproj", "{F896EFB4-1977-4546-8359-DCA4992B396C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "09.PokemonTrainer", "..\PokemonTrainer\09.PokemonTrainer.csproj", "{F896EFB4-1977-4546-8359-DCA4992B396C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "10. SoftUni Parking", "..\10. SoftUni Parking\10. SoftUni Parking.csproj", "{FE8BB518-8502-410A-BC06-A9D1BB0A10BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{F896EFB4-1977-4546-8359-DCA4992B396C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F896EFB4-1977-4546-8359-DCA4992B396C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F896EFB4-1977-4546-8359-DCA4992B396C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE8BB518-8502-410A-BC06-A9D1BB0A10BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE8BB518-8502-410A-BC06-A9D1BB0A10BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE8BB518-8502-410A-BC06-A9D1BB0A10BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE8BB518-8502-410A-BC06-A9D1BB0A10BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
