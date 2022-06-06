@@ -11,7 +11,9 @@ namespace DefiningClasses
             
             int n = int.Parse(Console.ReadLine());
 
-            List<Person> persons = new List<Person>();
+            Family family = new Family();
+
+            
 
             for (int i = 0; i < n; i++)
             {
@@ -20,19 +22,21 @@ namespace DefiningClasses
                 string name = intput[0];
                 int age = int.Parse(intput[1]);
                 Person person = new Person(name,age);
-
-                if (age > 30)
-                {
-                    persons.Add(person);
-                }
+                family.AddMember(person);
             }
 
-            var orderedList = persons.OrderBy(x =>x.Name).ToList();
 
-            foreach (var item in orderedList)
+
+            var sortedPeople = family.People.FindAll(x => x.Age > 30).OrderBy(x => x.Name);
+
+            foreach (var person in sortedPeople)
             {
-                Console.WriteLine($"{item.Name} - {item.Age}");
+                Console.WriteLine($"{person.Name} - {person.Age}");
             }
+
+          
+
+           
             
         }
     }
