@@ -12,35 +12,108 @@ namespace TheFightforGondor
 
             int[] platesInput = Console.ReadLine().Split().Select(int.Parse).ToArray();
 
-            Queue<int> aragonsDefensePlates = new Queue<int>(platesInput);
+            Queue<int> plates = new Queue<int>(platesInput);
 
-            int wavesCounter = 0;
+            int wavesCounter = 1;
+
+            //bool isPlatesWon = false;
+            bool isOrcsWon = false;
 
             for (int i = 0; i < orcsWavesNumber; i++)
             {
+                int[] orcsInput = Console.ReadLine().Split().Select(int.Parse).ToArray();
+
                 if (wavesCounter == 3)
                 {
                     int additionalPlate = int.Parse(Console.ReadLine());
-                    aragonsDefensePlates.Enqueue(additionalPlate);
-                    wavesCounter = 0;
+                    plates.Enqueue(additionalPlate);
+                    wavesCounter = 1;
                 }
 
-                int[] orcsInput = Console.ReadLine().Split().Select(int.Parse).ToArray();
+                
+
 
                 Stack<int> orcs = new Stack<int>(orcsInput);
 
+                var currentPlate = plates.Peek();
+                var currentOrc = orcs.Peek();
+
                 while (true)
                 {
-                    var currentPlate = aragonsDefensePlates.Peek();
-                    var currentOrc = orcs.Peek();
+
+                    if (currentOrc > currentPlate)
+                    {
+                        currentOrc -= currentPlate;
+                        if (currentOrc <= 0)
+                        {
+                            currentOrc = orcs.Pop();
+                        }
+                        plates.Dequeue();
+                        currentPlate = plates.Peek();
+                    }
+                    else if (currentOrc < currentPlate)
+                    {
+                        currentPlate -= currentOrc;
+                        if (currentPlate <= 0)
+                        {
+                           currentPlate = plates.Dequeue();
+                        }
+                        orcs.Pop();
+                        currentOrc = orcs.Peek();
+                    }
+                    else
+                    {
+                        plates.Dequeue();
+                        orcs.Pop();
+                    }
 
 
 
+                    if (plates.Count == 0)
+                    {
+                        isOrcsWon = true;
+                        break;
+                    }
+
+                    if (orcs.Count == 0)
+                    {
+                        break;
+                    }
+
+                }
+
+                if (isOrcsWon)
+                {
+                    Console.WriteLine("The orcs successfully destroyed the Gondor's defense.");
+
+                    
+                    var orcsList = new List<int>();
+
+                    foreach (var orc in orcs)
+                    {
+                        orcsList.Add(orc);
+                    }
+
+                    Console.WriteLine($"Orcs left: {string.Join(", ",orcsList)}");
+
+                    Environment.Exit(0);
                 }
 
                 
                 wavesCounter++;
             }
+
+
+            Console.WriteLine("The people successfully repulsed the orc's attack.");
+
+            var platesFinalList = new List<int>();
+
+            foreach (var plate in plates)
+            {
+                platesFinalList.Add(plate);
+            }
+
+            Console.WriteLine($"Plates left: {string.Join(", ",platesFinalList)}");
         }
     }
 }
