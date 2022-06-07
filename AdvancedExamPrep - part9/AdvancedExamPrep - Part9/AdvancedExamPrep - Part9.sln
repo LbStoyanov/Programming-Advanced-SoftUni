@@ -5,6 +5,10 @@ VisualStudioVersion = 17.2.32516.85
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01. The Fight for Gondor", "01. The Fight for Gondor\01. The Fight for Gondor.csproj", "{20F723EE-1F09-4F83-A82C-EF9657070F28}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02. Warships", "02. Warships\02. Warships.csproj", "{C51F5FFE-5FC6-4A09-819C-293ABB72614E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03. The Race", "03. The Race\03. The Race.csproj", "{E23FC388-8949-47DF-B83A-5B9C21C26D59}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{20F723EE-1F09-4F83-A82C-EF9657070F28}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20F723EE-1F09-4F83-A82C-EF9657070F28}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20F723EE-1F09-4F83-A82C-EF9657070F28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C51F5FFE-5FC6-4A09-819C-293ABB72614E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C51F5FFE-5FC6-4A09-819C-293ABB72614E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C51F5FFE-5FC6-4A09-819C-293ABB72614E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C51F5FFE-5FC6-4A09-819C-293ABB72614E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E23FC388-8949-47DF-B83A-5B9C21C26D59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E23FC388-8949-47DF-B83A-5B9C21C26D59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E23FC388-8949-47DF-B83A-5B9C21C26D59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E23FC388-8949-47DF-B83A-5B9C21C26D59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

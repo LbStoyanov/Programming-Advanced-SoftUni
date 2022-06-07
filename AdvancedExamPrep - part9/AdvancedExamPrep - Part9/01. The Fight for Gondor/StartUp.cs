@@ -11,7 +11,7 @@ namespace TheFightforGondor
 
             int orcsWavesNumber = int.Parse(Console.ReadLine());
 
-            int[] platesInput = Console.ReadLine().Split().Select(int.Parse).ToArray();
+            int[] platesInput = Console.ReadLine().Split(" ",StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
 
             Queue<int> plates = new Queue<int>(platesInput);
 
@@ -22,7 +22,7 @@ namespace TheFightforGondor
 
             for (int i = 0; i < orcsWavesNumber; i++)
             {
-                int[] orcsInput = Console.ReadLine().Split().Select(int.Parse).ToArray();
+                int[] orcsInput = Console.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
 
                 if (wavesCounter == 3)
                 {
