@@ -8,6 +8,7 @@ namespace TheFightforGondor
     {
         static void Main(string[] args)
         {
+
             int orcsWavesNumber = int.Parse(Console.ReadLine());
 
             int[] platesInput = Console.ReadLine().Split().Select(int.Parse).ToArray();
@@ -30,9 +31,6 @@ namespace TheFightforGondor
                     wavesCounter = 1;
                 }
 
-                
-
-
                 Stack<int> orcs = new Stack<int>(orcsInput);
 
                 var currentPlate = plates.Peek();
@@ -43,12 +41,19 @@ namespace TheFightforGondor
 
                     if (currentOrc > currentPlate)
                     {
-                        currentOrc -= currentPlate;
+                        currentOrc -= currentPlate; // 6 - 5
                         if (currentOrc <= 0)
                         {
                             currentOrc = orcs.Pop();
                         }
                         plates.Dequeue();
+                        if (plates.Count == 0)
+                        {
+                            isOrcsWon = true;
+                            orcs.Pop();
+                            orcs.Push(currentOrc);
+                            break;
+                        }
                         currentPlate = plates.Peek();
                     }
                     else if (currentOrc < currentPlate)
@@ -59,6 +64,13 @@ namespace TheFightforGondor
                            currentPlate = plates.Dequeue();
                         }
                         orcs.Pop();
+                        if (orcs.Count == 0)
+                        {
+                            plates.Dequeue();
+                            plates.Enqueue(currentPlate);
+                            break;
+                        }
+
                         currentOrc = orcs.Peek();
                     }
                     else
@@ -99,7 +111,6 @@ namespace TheFightforGondor
                     Environment.Exit(0);
                 }
 
-                
                 wavesCounter++;
             }
 
