@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Selling
+namespace Garden
 {
-    internal class Selling
+    internal class Garden
     {
         static void Main(string[] args)
         {
