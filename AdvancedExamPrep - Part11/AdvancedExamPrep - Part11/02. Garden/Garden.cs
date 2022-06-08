@@ -8,7 +8,7 @@ namespace Garden
     {
         static void Main(string[] args)
         {
-            int[] gardenSize = Console.ReadLine().Split(" ").Select(int.Parse).ToArray();
+            int[] gardenSize = Console.ReadLine().Split(" ",StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
 
             int rows = gardenSize[0];
             int cols = gardenSize[1];
