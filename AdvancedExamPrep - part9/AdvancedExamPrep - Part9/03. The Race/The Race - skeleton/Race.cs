@@ -32,6 +32,7 @@ namespace TheRace
             if (this.Capacity > 0)
             {
                 this.Data.Add(Racer);
+                Capacity--;
             }
         }
         public bool Remove(string name)
@@ -40,6 +41,7 @@ namespace TheRace
             {
                 Racer racerToRemove = this.Data.FirstOrDefault(r => r.Name == name);
                 this.Data.Remove(racerToRemove);
+                Capacity++;
                 return true;
             }
 
