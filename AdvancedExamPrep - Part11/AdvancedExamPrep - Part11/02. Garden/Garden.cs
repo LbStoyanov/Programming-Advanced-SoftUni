@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Selling
@@ -7,41 +8,103 @@ namespace Selling
     {
         static void Main(string[] args)
         {
-            int[] matrixSize = Console.ReadLine().Split(", ").Select(int.Parse).ToArray();
+            int[] gardenSize = Console.ReadLine().Split(" ").Select(int.Parse).ToArray();
 
-            int rows = matrixSize[0];
-            int cols = matrixSize[1];
+            int rows = gardenSize[0];
+            int cols = gardenSize[1];
 
-            char[,] matrix = new char[rows, cols];
+            int[,] garden = new int[rows, cols];
+            List<int> flowersCoordinates = new List<int>();
 
-            ReadingMatrix(matrix);
+            string commands;
+
+            while ((commands = Console.ReadLine()) != "Bloom Bloom Plow")
+            {
+                int[] platedFlowersCoordinates = commands.Split(" ",StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
+                int row = platedFlowersCoordinates[0];
+                int col = platedFlowersCoordinates[1];
+
+                if (!isInRange(garden,row,col))
+                {
+                    Console.WriteLine("Invalid coordinates");
+                    continue;
+                }
+
+                flowersCoordinates.Add(row);
+                flowersCoordinates.Add(col);
+            }
+
+            for (int i = 0; i < flowersCoordinates.Count; i+=2)
+            {
+                int row = flowersCoordinates[i];
+                int col = flowersCoordinates[i+1];
+
+                BloomTheFlowers(garden, row, col);
+
+            }
+
+            PrintTheFinalStateOfTheMatrix(garden);
+            
         }
-        public void PrintTheFinalStateOfTheMatrix(char[,] matrix)
+
+        private static void BloomTheFlowers(int[,] garden, int row, int col)
+        {
+            int startRow = row;
+            int startCol = col;
+
+            garden[startRow, col]++;
+            startRow--;
+
+            while (isInRange(garden, startRow, col))
+            {
+                garden[startRow, col]++;
+                startRow--;
+            }
+            startRow = row;
+
+            startRow++;
+
+            while (isInRange(garden, startRow, col))
+            {
+                garden[startRow, col]++;
+                startRow++;
+            }
+            startRow = row;
+
+            startCol++;
+
+            while (isInRange(garden,row,startCol))
+            {
+                garden[row, startCol]++;
+                startCol++;
+            }
+            startCol = col;
+
+            startCol--;
+
+            while (isInRange(garden, row, startCol))
+            {
+                garden[row, startCol]++;
+                startCol--;
+            }
+
+            startCol = col;
+        }
+
+        public static void PrintTheFinalStateOfTheMatrix(int[,] matrix)
         {
             for (int row = 0; row < matrix.GetLength(0); row++)
             {
                 for (int col = 0; col < matrix.GetLength(1); col++)
                 {
-                    Console.Write(matrix[row,col]);
+                    Console.Write(matrix[row,col] + " ");
                 }
                 Console.WriteLine();
             }
 
         }
-        public static void ReadingMatrix(char[,] matrix)
-        {
-            for (int row = 0; row < matrix.GetLength(0); row++)
-            {
-                char[] rowInput = Console.ReadLine().ToCharArray();
-                for (int col = 0; col < rowInput.Length; col++)
-                {
-                    matrix[row, col] = rowInput[col];
-                }
-            }
 
-        }
-
-        private static bool isInRange(char[,] matrix, int row, int col)
+        private static bool isInRange(int[,] matrix, int row, int col)
         {
             return row >= 0 && row < matrix.GetLength(0) && col >= 0 && col < matrix.GetLength(1);
         }
