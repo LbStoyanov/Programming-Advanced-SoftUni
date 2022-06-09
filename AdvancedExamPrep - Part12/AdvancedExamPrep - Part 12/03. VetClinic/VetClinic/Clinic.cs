@@ -7,18 +7,15 @@ namespace VetClinic
 {
     public class Clinic
     {
-        private List<Pet> pets;
+        //private List<Pet> pets;
         public Clinic(int capacity)
         {
             Capacity = capacity;
             Pets = new List<Pet>();
         }
 
-        public List<Pet> Pets
-        {
-            get { return pets; }
-            set { pets = value; }
-        }
+        public List<Pet> Pets { get; set; }
+        
 
         public int Capacity { get; set; }
 
@@ -41,6 +38,7 @@ namespace VetClinic
                 Pet petToRemove = Pets.FirstOrDefault(p => p.Name == name);
 
                 Pets.Remove(petToRemove);
+                Capacity++;
                 return true;
             }
 
@@ -59,22 +57,32 @@ namespace VetClinic
 
         public Pet GetOldestPet()
         {
-            //Check if there is any pets at all!
-            Pet oldestPet = Pets.OrderByDescending(x => x.Age).First();
-            return oldestPet;
+            
+            if (Pets.Count > 0)
+            {
+                Pet oldestPet = Pets.OrderByDescending(x => x.Age).First();
+                return oldestPet;
+            }
+
+            return null;
         }
 
         public string GetStatistics()
         {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("The clinic has the following patients: ");
-
-            foreach (var pet in Pets)
+            if (this.Pets.Count > 0)
             {
-                sb.AppendLine($"Pet {pet.Name} with owner: {pet.Owner}");
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine("The clinic has the following patients:");
+
+                foreach (var pet in Pets)
+                {
+                    sb.AppendLine($"Pet {pet.Name} with owner: {pet.Owner}");
+                }
+
+                return sb.ToString().TrimEnd();
             }
 
-            return sb.ToString().TrimEnd();
+            return "";
         }
     }
 }
