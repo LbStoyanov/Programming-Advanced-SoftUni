@@ -24,7 +24,12 @@ namespace Zoo
         }
         public Animal GetAnimalByWeight(double weight)
         {
-            return Animals.FirstOrDefault(a => a.Weight == weight);
+            if (Capacity > 0)
+            {
+                return Animals.FirstOrDefault(a => a.Weight == weight);
+            }
+
+            return null;
         }
         public List<Animal> GetAnimalsByDiet(string diet)
         {
