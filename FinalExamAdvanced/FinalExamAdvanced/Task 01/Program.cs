@@ -10,7 +10,7 @@ namespace Task_01
         {
             const int Sink = 40;
             const int Oven = 50;
-            const int Countertop = 60;
+            const int _Countertop = 60;
             const int Wall = 70;
 
 
@@ -32,50 +32,62 @@ namespace Task_01
 
             while (whiteTiles.Count > 0 && greyTiles.Count > 0)
             {
+             
                 var currentGreyTile = greyTiles.Peek();
                 var currentWhiteTile = whiteTiles.Peek();
 
-                int newFormedArea = currentGreyTile + currentWhiteTile;
+                if (currentGreyTile == currentWhiteTile)
+                {
+                    int newFormedArea = currentGreyTile + currentWhiteTile;
 
-                if (newFormedArea == Sink)
-                {
-                    locations["Sink"]++;
-                    greyTiles.Dequeue();
-                    whiteTiles.Pop();
+                    if (newFormedArea == Sink)
+                    {
+                        locations["Sink"]++;
+                        greyTiles.Dequeue();
+                        whiteTiles.Pop();
+                    }
+                    else if (newFormedArea == Oven)
+                    {
+                        locations["Oven"]++;
+                        greyTiles.Dequeue();
+                        whiteTiles.Pop();
+                    }
+                    else if (newFormedArea == _Countertop)
+                    {
+                        locations["Countertop"]++;
+                        greyTiles.Dequeue();
+                        whiteTiles.Pop();
+                    }
+                    else if (newFormedArea == Wall)
+                    {
+                        locations["Wall"]++;
+                        greyTiles.Dequeue();
+                        whiteTiles.Pop();
+                    }
+                    else if (currentGreyTile == currentWhiteTile)
+                    {
+                        locations["Floor"]++;
+                        greyTiles.Dequeue();
+                        whiteTiles.Pop();
+                    }
+                    else 
+                    {
+                      
+
+                    }
                 }
-                else if (newFormedArea == Oven)
+                else
                 {
-                    locations["Oven"]++;
-                    greyTiles.Dequeue();
-                    whiteTiles.Pop();
-                }
-                else if (newFormedArea == Countertop)
-                {
-                    locations["Countertop"]++;
-                    greyTiles.Dequeue();
-                    whiteTiles.Pop();
-                }
-                else if (newFormedArea == Wall)
-                {
-                    locations["Wall"]++;
-                    greyTiles.Dequeue();
-                    whiteTiles.Pop();
-                }
-                else if (currentGreyTile == currentWhiteTile)
-                {
-                    locations["Floor"]++;
-                    greyTiles.Dequeue();
-                    whiteTiles.Pop();
-                }
-                else if(currentGreyTile != currentWhiteTile)
-                {
-                    int decreasedWhiteTile = whiteTiles.Pop() / 2;
+                    var decreasedWhiteTile = whiteTiles.Pop() / 2;
                     whiteTiles.Push(decreasedWhiteTile);
-
-                    int grayTileToInsert = greyTiles.Dequeue();
-                    greyTiles.Enqueue(grayTileToInsert);
+                    var currentTile = greyTiles.Dequeue();
+                    greyTiles.Enqueue(currentTile);
 
                 }
+
+                
+
+                
 
             }
 
